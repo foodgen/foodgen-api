@@ -1,0 +1,300 @@
+openapi: 3.0.3
+info:
+  version: 'latest'
+  title: FoodGen - API
+  description: |
+    A simple API that creates random food
+security:
+  - BearerAuth: []
+paths:
+  /ping:
+    get:
+      tags:
+        - healthCheck
+      summary: Health check of the server
+      description: Check if the server is up or not
+      operationId: ping
+      responses:
+        '200':
+          description: pong
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Hello world
+        '400':
+          description: Bad request
+        '404':
+          description: Ressource not found
+        '500':
+          description: Server error
+  /user:
+    put:
+      tags:
+        - user
+      summary: Create or update an user
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+      responses:
+        '200':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request
+        '404':
+          description: Ressource not found
+        '500':
+          description: Server error
+  /user/login:
+    get:
+      tags:
+        - user
+      summary: Logs user into the system
+      operationId: loginUser
+      parameters:
+        - name: username
+          in: query
+          description: Put the username of your account
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: Put the password of your account
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Logged in
+        '400':
+          description: Invalid username/password supplied
+        '404':
+          description: Ressource not found
+        '500':
+          description: Server error
+  /user/logout:
+    get:
+      tags:
+        - user
+      summary: Logs out current logged in user
+      operationId: logoutUser
+      parameters: []
+      responses:
+        '200':
+          description: Logging out
+        '400':
+          description: Bad Request
+        '404':
+          description: Ressource not found
+        '500':
+          description: Server error
+  '/user/{username}':
+    get:
+      tags:
+        - user
+      summary: Get user by user name
+      operationId: getUserByName
+      parameters:
+        - name: username
+          in: path
+          description: 'The name that needs to be fetched'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+        '500':
+          description: Server error
+  /recipe:
+    get:
+      tags:
+        - recipe
+      summary: Get recipe by id
+      operationId: getRecipeById
+      parameters:
+        - name: recipeId
+          in: path
+          description: 'The id of the recipe that needs to be fetched'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Recipe taken from Database
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+        '400':
+          description: Invalid id supplied
+        '404':
+          description: Recipe not found
+        '500':
+          description: Server error
+  /meal:
+    get:
+      tags:
+        - meal
+      summary: Randomly pick meals from Database
+      operationId: getMeals
+      responses:
+        '200':
+          description: List of Meals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Meal'
+        '400':
+          description: Error when sending the request
+        '404':
+          description: Ressources not found
+        '500':
+          description: Server error
+  /ingredients:
+    get:
+      tags:
+        - ingredients
+      summary: Get ingredients by id
+      operationId: getIngredientsById
+      parameters:
+        - name: recipeId
+          in: path
+          description: 'The id of the recipe that needs to be fetched'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecipeIngredients'
+        '400':
+          description: Invalid id supplied
+        '404':
+          description: Recipe not found
+        '500':
+          description: Server error
+components:
+  schemas:
+    User:
+      allOf:
+        - $ref: '#/components/schemas/CreateUser'
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+    CreateUser:
+      type: object
+      properties:
+        username:
+          type: string
+          example: UserOne
+        firstName:
+          type: string
+          example: Rio
+        lastName:
+          type: string
+          example: Camero
+        email:
+          type: string
+          example: rio@email.com
+        password:
+          type: string
+          example: 12345
+    Region:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: Italy
+    Recipe:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: Pizza
+        readme:
+          type: string
+          example: Bunch of text
+    Ingredients:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: Tomato
+    Allergy:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 10
+        user:
+          $ref: '#/components/schemas/User'
+        ingredient:
+          $ref: '#/components/schemas/Ingredients'
+    RecipeIngredients:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 10
+        recipe:
+          $ref: '#/components/schemas/Recipe'
+        ingredient:
+          $ref: '#/components/schemas/Ingredients'
+    Meal:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: Pizza
+        region:
+          $ref: '#/components/schemas/Region'
+        recipe:
+          $ref: "#/components/schemas/Recipe"
+        image:
+          type: string
+        download:
+          type: integer
+          example: 10
