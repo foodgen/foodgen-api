@@ -128,6 +128,122 @@ paths:
         '500':
           $ref: '#/components/responses/500'
 
+  '/regions':
+    get:
+      tags:
+        - Region
+      summary: get all available regions
+      operationId: getRegions
+      parameters:
+        - name: page
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Page'
+        - name: page_size
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/PageSize'
+      responses:
+        '200':
+          description: return a list of regions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Region'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    put:
+      tags:
+        - Region
+      summary: Create or update regions
+      operationId: crupdateRegions
+      requestBody:
+        description: List of regions to be crupdated
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Region'
+      responses:
+        '200':
+          description: return a list crupdated regions.
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Region'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  '/regions/{id}':
+    get:
+      tags:
+        - Region
+      summary: get a specific region by its id
+      operationId: getRegionById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: return the specified region
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Region'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      tags:
+        - Region
+      summary: delelte a specific region by its id
+      operationId: deleteRegionById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: removed successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+
   '/recipes/{id}':
     get:
       tags:
@@ -211,6 +327,27 @@ paths:
           $ref: '#/components/responses/500'
 
 
+  /allergy:
+    get:
+      tags:
+        - allergy
+      summary: Get user allergy
+      operationId: getAllergy
+      responses:
+        '200':
+          description: List of Allergy
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Allergy'
+        '400':
+          description: Error when sending the request
+        '404':
+          description: Ressources not found
+        '500':
+          description: Server error
 components:
   responses:
     '400':
