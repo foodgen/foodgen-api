@@ -1,4 +1,4 @@
-package com.genfood.foodgenback.model;
+package com.genfood.foodgenback.repository.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "\"recipe\"")
+@Table(name = "\"ingredient\"")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +23,6 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class Ingredients {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String id;
 
   @Column(nullable = false)
