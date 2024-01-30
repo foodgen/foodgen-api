@@ -5,7 +5,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class FoodGenBackApplicationTests {
-
-  @Test
-  void contextLoads() {}
+  void contextLoads() { }
 }
