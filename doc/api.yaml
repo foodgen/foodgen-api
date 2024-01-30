@@ -243,7 +243,7 @@ paths:
     delete:
       tags:
         - Region
-      summary: delelte a specific region by its id
+      summary: delete a specific region by its id
       operationId: deleteRegionById
       parameters:
         - name: id
@@ -285,7 +285,67 @@ paths:
           content:
             application/json:
               schema:
+                $ref: '#/components/schemas/RecipeIngredients'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  '/recipes':
+    get:
+      tags:
+        - recipe
+      summary: Get all recipes
+      operationId: getRecipes
+      parameters:
+        - name: page
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Page'
+        - name: page_size
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/PageSize'
+      responses:
+        '200':
+          description: return the specific recipe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipeIngredients'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    put:
+      tags:
+        - recipe
+      summary: Create or update recipes
+      operationId: crupdateRecipes
+      requestBody:
+        description: List of recipes to be crupdated
+        content:
+          application/json:
+            schema:
+              items:
                 $ref: '#/components/schemas/Recipe'
+      responses:
+        '200':
+          description: return a list crupdated recipes.
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RecipeIngredients'
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -337,9 +397,69 @@ paths:
           content:
             application/json:
               schema:
+                $ref: '#/components/schemas/Ingredient'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  '/ingredients':
+    get:
+      tags:
+        - Ingredients
+      summary: Get all ingredients
+      operationId: getIngredients
+      parameters:
+        - name: page
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Page'
+        - name: page_size
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/PageSize'
+      responses:
+        '200':
+          description: return a list of regions
+          content:
+            application/json:
+              schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/RecipeIngredients'
+                  $ref: '#/components/schemas/Ingredient'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    put:
+      tags:
+        - Ingredients
+      summary: Create or update ingredients
+      operationId: crupdateIngredients
+      requestBody:
+        description: List of ingredients to be crupdated
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Ingredient'
+      responses:
+        '200':
+          description: return a list crupdated ingredients.
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Ingredient'
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -467,13 +587,12 @@ components:
     RecipeIngredients:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
         recipe:
           $ref: '#/components/schemas/Recipe'
         ingredient:
-          $ref: '#/components/schemas/Ingredient'
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredient'
     Meal:
       type: object
       properties:
