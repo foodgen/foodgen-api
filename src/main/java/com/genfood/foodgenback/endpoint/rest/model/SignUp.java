@@ -6,11 +6,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
-public class SignUp extends Auth {
+public class SignUp {
   private String username;
+  private String email;
+  private String password;
 }
