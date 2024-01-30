@@ -1,10 +1,14 @@
 package com.genfood.foodgenback.security;
 
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
+
+import com.genfood.foodgenback.endpoint.rest.model.Role;
 import com.genfood.foodgenback.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -39,10 +43,18 @@ public class SecurityConf {
             session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(
             auth ->
-                auth.requestMatchers(HttpMethod.POST, "/signup/**")
+                auth.requestMatchers(GET, "/ping")
                     .permitAll()
-                    .requestMatchers(HttpMethod.POST, "/login/**")
+                    .requestMatchers(POST, "/users/signup")
                     .permitAll()
+                    .requestMatchers(POST, "/users/login")
+                    .permitAll()
+                    .requestMatchers(PUT, "/users/**")
+                    .hasAnyRole(String.valueOf(Role.ADMIN))
+                    .requestMatchers(GET, "/users/**")
+                    .hasAnyRole(String.valueOf(Role.ADMIN))
+                    .requestMatchers(GET, "/regions/**")
+                    .hasAnyRole(String.valueOf(Role.ADMIN))
                     .anyRequest()
                     .authenticated())
         .authenticationManager(authenticationManager)

@@ -1,14 +1,15 @@
 package com.genfood.foodgenback.endpoint.rest.model;
 
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Data
-public class SignUpRequest implements Serializable {
-  private String username;
-  // TODO: validation
+public class Auth {
   private String email;
   private String password;
 }

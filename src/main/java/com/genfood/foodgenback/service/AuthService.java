@@ -1,8 +1,12 @@
 package com.genfood.foodgenback.service;
 
-import com.genfood.foodgenback.endpoint.rest.model.*;
+import com.genfood.foodgenback.endpoint.rest.model.Auth;
+import com.genfood.foodgenback.endpoint.rest.model.Principal;
+import com.genfood.foodgenback.endpoint.rest.model.Role;
+import com.genfood.foodgenback.endpoint.rest.model.SignUp;
 import com.genfood.foodgenback.model.User;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
@@ -19,25 +23,17 @@ public class AuthService {
   private final JWTService jwtService;
   private final PasswordEncoder passwordEncoder;
 
-  public LoggedUser signIn(SignInRequest signInUser) {
-    String email = signInUser.getEmail();
+  public String signIn(Auth toAuthenticate) {
+    String email = toAuthenticate.getEmail();
     UserDetails principal = userDetailsServiceImpl.loadUserByUsername(email);
-    if (!passwordEncoder.matches(signInUser.getPassword(), principal.getPassword())) {
+    if (!passwordEncoder.matches(toAuthenticate.getPassword(), principal.getPassword())) {
       throw new UsernameNotFoundException("Wrong Password!");
     }
-    User user = userService.getUserByEmail(email);
-    String token = jwtService.generateToken(principal);
-    return LoggedUser.builder()
-        .id(user.getId())
-        .username(user.getUsername())
-        .email(user.getEmail())
-        .role(user.getRole().name())
-        .token(token)
-        .build();
+    return jwtService.generateToken(principal);
   }
 
   @Transactional
-  public LoggedUser signUp(SignUpRequest user) {
+  public String signUp(SignUp user) {
     String email = user.getEmail();
     User existingUser = userService.getUserByEmail(email);
     if (Objects.nonNull(existingUser)) {
@@ -45,21 +41,17 @@ public class AuthService {
     }
     String hashedPassword = passwordEncoder.encode(user.getPassword());
     User createdUser =
-        userService.saveUser(
-            User.builder()
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .role(Role.USER)
-                .password(hashedPassword)
-                .build());
+        userService
+            .crupdateUsers(
+                List.of(
+                    User.builder()
+                        .username(user.getUsername())
+                        .email(user.getEmail())
+                        .role(Role.USER)
+                        .password(hashedPassword)
+                        .build()))
+            .get(0);
     Principal principal = Principal.builder().user(createdUser).build();
-    String token = jwtService.generateToken(principal);
-    return LoggedUser.builder()
-        .id(principal.getUser().getId())
-        .username(principal.getUser().getUsername())
-        .email(principal.getUsername())
-        .role(principal.getUser().getRole().name())
-        .token(token)
-        .build();
+    return jwtService.generateToken(principal);
   }
 }

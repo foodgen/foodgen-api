@@ -71,7 +71,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserPayload'
+              $ref: '#/components/schemas/Auth'
+      responses:
+        '200':
+          description: Logged in
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  '/users/signup':
+    post:
+      tags:
+        - User
+      summary: Let user sign up the application
+      operationId: signup
+      requestBody:
+        description: send new user credentials to the server
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Auth'
       responses:
         '200':
           description: Logged in
@@ -376,14 +399,13 @@ components:
             $ref: '#/components/schemas/InternalServerException'
   schemas:
     User:
+      allOf:
+        - $ref: '#/components/schemas/Auth'
       type: object
       properties:
         id:
           type: string
           format: uuid
-        username:
-          type: string
-          example: "user_one"
         first_name:
           type: string
           example: "Rio"
@@ -395,7 +417,7 @@ components:
           example: rio@email.com
         password:
           type: string
-    UserPayload:
+    Auth:
       type: object
       properties:
         username:
