@@ -18,7 +18,7 @@ public class RecipeIngredientMapper {
         }
         return RecipeIngredients.builder()
                 .recipe_id(entity.get(0).getRecipe().getId())
-                .ingredients(ingredients)
+                .ingredients(ingredients.size() > 0 ? ingredients : null)
                 .build();
     }
 }
