@@ -41,8 +41,8 @@ public class UserIT extends FacadeIT {
 
     @BeforeEach
     void setUp() {
-        userService = new UserService(userRepository,mailValidator);
-        userController = new UserController(userMapper,userService,authService);
+        userService = new UserService(userRepository, mailValidator);
+        userController = new UserController(userMapper, userService, authService);
     }
 
     @Test
@@ -61,12 +61,12 @@ public class UserIT extends FacadeIT {
 
     @Test
     void sign_up() {
-        Assertions.assertEquals( String.class, userController.signUp(signUp4()).getClass());
+        Assertions.assertEquals(String.class, userController.signUp(signUp4()).getClass());
     }
 
     @Test
     void sign_in() {
-        Assertions.assertEquals( String.class, userController.signIn(auth1()).getClass());
+        Assertions.assertEquals(String.class, userController.signIn(auth1()).getClass());
     }
 }
 

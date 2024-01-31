@@ -1,6 +1,9 @@
 package com.genfood.foodgenback.utils;
 
-import com.genfood.foodgenback.endpoint.rest.model.*;
+import com.genfood.foodgenback.endpoint.rest.model.Auth;
+import com.genfood.foodgenback.endpoint.rest.model.Role;
+import com.genfood.foodgenback.endpoint.rest.model.SignUp;
+import com.genfood.foodgenback.endpoint.rest.model.User;
 
 public class UserUtils {
 
@@ -31,13 +34,13 @@ public class UserUtils {
 
     public static final String UPDATED_USER3_USERNAME = "user3_name";
 
-    public static Auth auth1(){
+    public static Auth auth1() {
         return Auth.builder()
                 .email(USER1_EMAIL)
                 .password(USER1_PASSWORD)
                 .build();
     }
-    public static SignUp signUp4(){
+    public static SignUp signUp4() {
         return SignUp.builder()
                 .username(USER4_USERNAME)
                 .email(USER4_EMAIL)

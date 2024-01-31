@@ -51,8 +51,8 @@ public class RecipeIT extends FacadeIT {
 
     @BeforeEach
     void setUp() {
-        recipeService = new RecipeService(recipeRepository, recipeValidator,recipeIngredientRepository);
-        recipeController = new RecipeController(recipeService, recipeMapper,recipeIngredientMapper,recipeIngredientService);
+        recipeService = new RecipeService(recipeRepository, recipeValidator, recipeIngredientRepository);
+        recipeController = new RecipeController(recipeService, recipeMapper, recipeIngredientMapper, recipeIngredientService);
     }
 
     @Test

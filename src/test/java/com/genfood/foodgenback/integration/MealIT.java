@@ -30,7 +30,7 @@ public class MealIT extends FacadeIT {
     @BeforeEach
     void setUp() {
         mealService = new MealService(mealRepository);
-        mealController = new MealController(mealService,mealMapper);
+        mealController = new MealController(mealService, mealMapper);
     }
 
     @Test
