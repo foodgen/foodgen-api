@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class Ingredients {
-    private String id;
-    private String name;
+  private String id;
+  private String name;
 }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class Recipe {
-    private String id;
-    private String name;
-    private String readme;
+  private String id;
+  private String name;
+  private String readme;
 }

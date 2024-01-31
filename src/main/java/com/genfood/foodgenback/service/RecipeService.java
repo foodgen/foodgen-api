@@ -1,13 +1,10 @@
 package com.genfood.foodgenback.service;
 
 import com.genfood.foodgenback.repository.RecipeIngredientRepository;
-import com.genfood.foodgenback.repository.model.Recipe;
 import com.genfood.foodgenback.repository.RecipeRepository;
-import java.util.List;
-
-import com.genfood.foodgenback.repository.model.RecipeIngredient;
-import com.genfood.foodgenback.repository.model.Region;
+import com.genfood.foodgenback.repository.model.Recipe;
 import com.genfood.foodgenback.repository.validator.RecipeValidator;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

@@ -1,7 +1,7 @@
 package com.genfood.foodgenback.service;
 
 import com.genfood.foodgenback.endpoint.rest.model.Principal;
-import com.genfood.foodgenback.model.User;
+import com.genfood.foodgenback.repository.model.User;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

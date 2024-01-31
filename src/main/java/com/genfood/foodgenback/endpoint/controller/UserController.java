@@ -36,8 +36,8 @@ public class UserController {
   }
 
   @PutMapping
-  public List<User> Save(@RequestBody List<User> toCrupdate) {
-    List<com.genfood.foodgenback.model.User> entities =
+  public List<User> save(@RequestBody List<User> toCrupdate) {
+    List<com.genfood.foodgenback.repository.model.User> entities =
         toCrupdate.stream().map(mapper::toEntity).collect(Collectors.toUnmodifiableList());
     return userService.crupdateUsers(entities).stream()
         .map(mapper::toDto)

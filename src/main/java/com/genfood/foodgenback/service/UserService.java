@@ -1,7 +1,7 @@
 package com.genfood.foodgenback.service;
 
-import com.genfood.foodgenback.model.User;
 import com.genfood.foodgenback.repository.UserRepository;
+import com.genfood.foodgenback.repository.model.User;
 import com.genfood.foodgenback.repository.validator.MailValidator;
 import java.util.List;
 import lombok.AllArgsConstructor;

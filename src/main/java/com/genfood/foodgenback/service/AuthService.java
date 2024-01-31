@@ -4,7 +4,7 @@ import com.genfood.foodgenback.endpoint.rest.model.Auth;
 import com.genfood.foodgenback.endpoint.rest.model.Principal;
 import com.genfood.foodgenback.endpoint.rest.model.Role;
 import com.genfood.foodgenback.endpoint.rest.model.SignUp;
-import com.genfood.foodgenback.model.User;
+import com.genfood.foodgenback.repository.model.User;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;

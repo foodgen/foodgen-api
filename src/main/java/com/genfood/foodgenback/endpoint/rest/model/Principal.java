@@ -1,6 +1,6 @@
 package com.genfood.foodgenback.endpoint.rest.model;
 
-import com.genfood.foodgenback.model.User;
+import com.genfood.foodgenback.repository.model.User;
 import java.util.Collection;
 import java.util.List;
 import lombok.AllArgsConstructor;

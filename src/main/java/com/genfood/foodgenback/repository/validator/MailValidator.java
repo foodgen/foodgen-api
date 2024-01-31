@@ -1,7 +1,7 @@
 package com.genfood.foodgenback.repository.validator;
 
-import com.genfood.foodgenback.model.User;
 import com.genfood.foodgenback.repository.UserRepository;
+import com.genfood.foodgenback.repository.model.User;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
