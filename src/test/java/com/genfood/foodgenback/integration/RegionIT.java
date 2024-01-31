@@ -49,7 +49,6 @@ public class RegionIT extends FacadeIT {
 
   @Test
   void read_region_by_id() {
-    ;
     Region actual = controller.getRegionById(REGION1_ID);
     Assertions.assertEquals(region1(), actual);
   }

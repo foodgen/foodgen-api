@@ -36,7 +36,7 @@ public class IngredientController {
   }
 
   @PutMapping("/ingredients")
-  public List<Ingredients> crupdateRecipe(@RequestBody List<Ingredients> ingredients) {
+  public List<Ingredients> crupdateIngredients(@RequestBody List<Ingredients> ingredients) {
     List<com.genfood.foodgenback.repository.model.Ingredients> toSave =
         ingredients.stream()
             .map(ingredientMapper::toEntity)

@@ -1,6 +1,11 @@
 package com.genfood.foodgenback.utils;
 
 import com.genfood.foodgenback.endpoint.rest.model.Recipe;
+import com.genfood.foodgenback.endpoint.rest.model.RecipeIngredients;
+
+import java.util.List;
+
+import static com.genfood.foodgenback.utils.IngredientUtils.ig1;
 
 public class RecipeUtils {
   public static final String RECIPE1_ID = "recipe1_id";
@@ -16,6 +21,12 @@ public class RecipeUtils {
 
   public static Recipe recipe1() {
     return Recipe.builder().id(RECIPE1_ID).name(RECIPE1_NAME).readme(RECIPE1_README).build();
+  }
+  public static RecipeIngredients recipeIngredients1() {
+    return RecipeIngredients.builder()
+            .recipe(recipe1())
+            .ingredients(List.of(ig1()))
+            .build();
   }
 
   public static Recipe recipe2() {

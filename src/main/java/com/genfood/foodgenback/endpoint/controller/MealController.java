@@ -26,7 +26,7 @@ public class MealController {
   }
 
   @GetMapping("/meals/{id}")
-  public Meal getMeals(@PathVariable String id) {
+  public Meal getMealById(@PathVariable String id) {
     return mealMapper.toDto(mealService.getMealById(id));
   }
 }

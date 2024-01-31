@@ -1,8 +1,6 @@
 package com.genfood.foodgenback.utils;
 
-import com.genfood.foodgenback.endpoint.rest.model.Recipe;
-import com.genfood.foodgenback.endpoint.rest.model.Role;
-import com.genfood.foodgenback.endpoint.rest.model.User;
+import com.genfood.foodgenback.endpoint.rest.model.*;
 
 public class UserUtils {
 
@@ -12,6 +10,7 @@ public class UserUtils {
     public static final String USER1_USERNAME = "user1_username";
     public static final String USER2_USERNAME = "user2_username";
     public static final String USER3_USERNAME = "user3_username";
+    public static final String USER4_USERNAME = "user4_username";
     public static final String USER1_FIRSTNAME = "user1_firstname";
     public static final String USER2_FIRSTNAME = "user2_firstname";
     public static final String USER3_FIRSTNAME = "user3_firstname";
@@ -21,15 +20,30 @@ public class UserUtils {
     public static final String USER1_EMAIL = "user1@gmail.com";
     public static final String USER2_EMAIL = "user2@gmail.com";
     public static final String USER3_EMAIL = "user3@gmail.com";
+    public static final String USER4_EMAIL = "user4@gmail.com";
     public static final String USER1_PASSWORD = "vide";
     public static final String USER2_PASSWORD = "vide";
     public static final String USER3_PASSWORD = "vide";
+    public static final String USER4_PASSWORD = "vide";
     public static final String USER1_ROLE = "USER";
     public static final String USER2_ROLE = "USER";
     public static final String USER3_ROLE = "ADMIN";
 
     public static final String UPDATED_USER3_USERNAME = "user3_name";
 
+    public static Auth auth1(){
+        return Auth.builder()
+                .email(USER1_EMAIL)
+                .password(USER1_PASSWORD)
+                .build();
+    }
+    public static SignUp signUp4(){
+        return SignUp.builder()
+                .username(USER4_USERNAME)
+                .email(USER4_EMAIL)
+                .password(USER4_PASSWORD)
+                .build();
+    }
     public static User user1() {
         return User.builder()
                 .id(USER1_ID)
