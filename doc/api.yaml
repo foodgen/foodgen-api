@@ -363,13 +363,40 @@ paths:
       operationId: getMeals
       responses:
         '200':
-          description: return a list of meals
+          description: return a list of 3 random generated meals
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Meal'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  '/meal/{id}':
+    get:
+      tags:
+        - Meal
+      summary: Get a meal by id
+      operationId: getMealById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: return a meal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Meal'
         '400':
           $ref: '#/components/responses/400'
         '403':
