@@ -34,10 +34,10 @@ public class UserUtils {
 
     public static final String UPDATED_USER3_USERNAME = "user3_name";
 
-    public static Auth auth1() {
+    public static Auth auth4() {
         return Auth.builder()
-                .email(USER1_EMAIL)
-                .password(USER1_PASSWORD)
+                .email(USER4_EMAIL)
+                .password(USER4_PASSWORD)
                 .build();
     }
     public static SignUp signUp4() {
