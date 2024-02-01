@@ -17,6 +17,8 @@ public class JWTService {
   @Value("${token.signing.key}")
   private String jwtSigningKey;
 
+  private final int TOKEN_VALIDITY_DURATION = 1000 * 60 * 24; // one day or 24h in millisecond
+
   public String extractEmail(String token) {
     return extractClaim(token, Claims::getSubject);
   }
@@ -35,7 +37,7 @@ public class JWTService {
     return Jwts.builder()
         .subject(userDetails.getUsername())
         .issuedAt(new Date(System.currentTimeMillis()))
-        .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+        .expiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY_DURATION))
         .signWith(getSigningKey(), SignatureAlgorithm.HS256)
         .compact();
   }

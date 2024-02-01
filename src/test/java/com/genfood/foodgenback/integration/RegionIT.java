@@ -3,7 +3,6 @@ package com.genfood.foodgenback.integration;
 import static com.genfood.foodgenback.utils.RegionUtils.REGION1_ID;
 import static com.genfood.foodgenback.utils.RegionUtils.region1;
 import static com.genfood.foodgenback.utils.RegionUtils.region2;
-import static com.genfood.foodgenback.utils.RegionUtils.region3;
 import static com.genfood.foodgenback.utils.RegionUtils.updatedRegion3;
 
 import com.genfood.foodgenback.conf.FacadeIT;

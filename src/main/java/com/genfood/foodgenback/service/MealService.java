@@ -2,7 +2,6 @@ package com.genfood.foodgenback.service;
 
 import com.genfood.foodgenback.repository.MealRepository;
 import com.genfood.foodgenback.repository.model.Meal;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

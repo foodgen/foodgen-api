@@ -5,7 +5,6 @@ import com.genfood.foodgenback.endpoint.rest.model.RecipeIngredients;
 import com.genfood.foodgenback.repository.model.RecipeIngredient;
 import java.util.ArrayList;
 import java.util.List;
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

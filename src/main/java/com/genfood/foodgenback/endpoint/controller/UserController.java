@@ -6,6 +6,7 @@ import com.genfood.foodgenback.endpoint.rest.model.SignUp;
 import com.genfood.foodgenback.endpoint.rest.model.User;
 import com.genfood.foodgenback.service.AuthService;
 import com.genfood.foodgenback.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
@@ -47,5 +48,10 @@ public class UserController {
   @GetMapping("/{username}")
   public User getByUserName(@PathVariable String username) {
     return mapper.toDto(userService.getUserByUsername(username));
+  }
+
+  @GetMapping("/whoami")
+  public User whoami(HttpServletRequest request) {
+    return mapper.toDto(service.whoami(request));
   }
 }

@@ -1,58 +1,54 @@
 package com.genfood.foodgenback.integration;
 
+import static com.genfood.foodgenback.utils.MealUtils.MEAL1_ID;
+import static com.genfood.foodgenback.utils.MealUtils.meal1;
+import static com.genfood.foodgenback.utils.MealUtils.meal2;
+import static com.genfood.foodgenback.utils.MealUtils.meal3;
+
 import com.genfood.foodgenback.conf.FacadeIT;
 import com.genfood.foodgenback.endpoint.controller.MealController;
 import com.genfood.foodgenback.endpoint.rest.mapper.MealMapper;
 import com.genfood.foodgenback.endpoint.rest.model.Meal;
 import com.genfood.foodgenback.repository.MealRepository;
 import com.genfood.foodgenback.service.MealService;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import java.util.List;
-import static com.genfood.foodgenback.utils.MealUtils.MEAL1_ID;
-import static com.genfood.foodgenback.utils.MealUtils.meal1;
-import static com.genfood.foodgenback.utils.MealUtils.meal2;
-import static com.genfood.foodgenback.utils.MealUtils.meal3;
-
 
 @Testcontainers
 @Slf4j
 public class MealIT extends FacadeIT {
-    MealController mealController;
-    MealService mealService;
-    @Autowired
-    MealMapper mealMapper;
-    @Autowired
-    MealRepository mealRepository;
+  MealController mealController;
+  MealService mealService;
+  @Autowired MealMapper mealMapper;
+  @Autowired MealRepository mealRepository;
 
-    @BeforeEach
-    void setUp() {
-        mealService = new MealService(mealRepository);
-        mealController = new MealController(mealService, mealMapper);
-    }
+  @BeforeEach
+  void setUp() {
+    mealService = new MealService(mealRepository);
+    mealController = new MealController(mealService, mealMapper);
+  }
 
-    @Test
-    void read_meals() {
-        List<Meal> actual = mealController.getMeals();
-        log.info(String.valueOf(actual));
-        log.info(String.valueOf(meal1()));
-        log.info(String.valueOf(meal2()));
-        log.info(String.valueOf(meal3()));
-        Assertions.assertTrue(actual.contains(meal1()));
-        Assertions.assertTrue(actual.contains(meal2()));
-        Assertions.assertTrue(actual.contains(meal3()));
-        Assertions.assertEquals(3, actual.size());
-    }
+  @Test
+  void read_meals() {
+    List<Meal> actual = mealController.getMeals();
+    log.info(String.valueOf(actual));
+    log.info(String.valueOf(meal1()));
+    log.info(String.valueOf(meal2()));
+    log.info(String.valueOf(meal3()));
+    Assertions.assertTrue(actual.contains(meal1()));
+    Assertions.assertTrue(actual.contains(meal2()));
+    Assertions.assertTrue(actual.contains(meal3()));
+    Assertions.assertEquals(3, actual.size());
+  }
 
-    @Test
-    void read_meal_by_id() {
-        Meal actual = mealController.getMealById(MEAL1_ID);
-        Assertions.assertEquals(meal1(), actual);
-    }
-
+  @Test
+  void read_meal_by_id() {
+    Meal actual = mealController.getMealById(MEAL1_ID);
+    Assertions.assertEquals(meal1(), actual);
+  }
 }
-

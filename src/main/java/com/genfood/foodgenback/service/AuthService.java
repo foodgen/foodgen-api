@@ -5,6 +5,7 @@ import com.genfood.foodgenback.endpoint.rest.model.Principal;
 import com.genfood.foodgenback.endpoint.rest.model.Role;
 import com.genfood.foodgenback.endpoint.rest.model.SignUp;
 import com.genfood.foodgenback.repository.model.User;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
@@ -22,6 +23,8 @@ public class AuthService {
   private final UserDetailsServiceImpl userDetailsServiceImpl;
   private final JWTService jwtService;
   private final PasswordEncoder passwordEncoder;
+  private final String AUTHORIZATION_HEADER = "Authorization";
+  private final int BEARER_PREFIX_COUNT = 7;
 
   public String signIn(Auth toAuthenticate) {
     String email = toAuthenticate.getEmail();
@@ -53,5 +56,12 @@ public class AuthService {
             .get(0);
     Principal principal = Principal.builder().user(createdUser).build();
     return jwtService.generateToken(principal);
+  }
+
+  public User whoami(HttpServletRequest request) {
+    String authHeader = request.getHeader(AUTHORIZATION_HEADER);
+    String token = authHeader.substring(BEARER_PREFIX_COUNT);
+    String email = jwtService.extractEmail(token);
+    return userService.getUserByEmail(email);
   }
 }
