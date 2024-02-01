@@ -52,6 +52,7 @@ public class RecipeIT extends FacadeIT {
     @BeforeEach
     void setUp() {
         recipeService = new RecipeService(recipeRepository, recipeValidator, recipeIngredientRepository);
+        recipeIngredientService = new RecipeIngredientService(recipeIngredientRepository);
         recipeController = new RecipeController(recipeService, recipeMapper, recipeIngredientMapper, recipeIngredientService);
     }
 
@@ -72,7 +73,6 @@ public class RecipeIT extends FacadeIT {
 
     @Test
     void crupdate_recipes() {
-        recipeController.crupdateRecipes(List.of(recipe1(), recipe2(), recipe3()));
         recipeController.crupdateRecipes(List.of(updatedRecipe3()));
         List<Recipe> actual = recipeController.getRecipes(PAGE, PAGE_SIZE);
         Assertions.assertEquals(updatedRecipe3(), actual.get(2));

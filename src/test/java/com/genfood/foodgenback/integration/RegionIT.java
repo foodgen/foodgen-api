@@ -55,7 +55,6 @@ public class RegionIT extends FacadeIT {
 
   @Test
   void crupdate_regions() {
-    controller.crupdateRegions(List.of(region1(), region2(), region3()));
     controller.crupdateRegions(List.of(updatedRegion3()));
     List<Region> actual = controller.getRegions(PAGE, PAGE_SIZE);
     Assertions.assertEquals(updatedRegion3(), actual.get(2));

@@ -17,7 +17,7 @@ public class RecipeIngredientMapper {
 
   public RecipeIngredients toDto(List<RecipeIngredient> entity) {
     List<Ingredients> ingredients = new ArrayList<>();
-    for (int i = 0; i <= entity.size(); i++) {
+    for (int i = 0; i < entity.size(); i++) {
       ingredients.add(ingredientMapper.toDto(entity.get(i).getIngredient()));
     }
     return RecipeIngredients.builder()

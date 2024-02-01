@@ -5,7 +5,7 @@ import com.genfood.foodgenback.endpoint.rest.model.RecipeIngredients;
 
 import java.util.List;
 
-import static com.genfood.foodgenback.utils.IngredientUtils.ig1;
+import static com.genfood.foodgenback.utils.IngredientUtils.*;
 
 public class RecipeUtils {
   public static final String RECIPE1_ID = "recipe1_id";
@@ -25,7 +25,7 @@ public class RecipeUtils {
   public static RecipeIngredients recipeIngredients1() {
     return RecipeIngredients.builder()
             .recipe(recipe1())
-            .ingredients(List.of(ig1()))
+            .ingredients(List.of(ig1(),ig2(),ig3()))
             .build();
   }
 

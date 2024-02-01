@@ -53,8 +53,8 @@ public class UserIT extends FacadeIT {
 
     @Test
     void crupdate_user() {
-        userController.save(List.of(user1(), user2(), user3()));
-        userController.save(List.of(updatedUser3()));
+        userController.crupdateUsers(List.of(user1(), user2(), user3()));
+        userController.crupdateUsers(List.of(updatedUser3()));
         User actual = userController.getByUserName(USER3_USERNAME);
         Assertions.assertEquals(updatedUser3(), actual);
     }
