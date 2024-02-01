@@ -21,7 +21,6 @@ import java.util.List;
 import static com.genfood.foodgenback.utils.RecipeUtils.RECIPE1_ID;
 import static com.genfood.foodgenback.utils.RecipeUtils.recipe1;
 import static com.genfood.foodgenback.utils.RecipeUtils.recipe2;
-import static com.genfood.foodgenback.utils.RecipeUtils.recipe3;
 import static com.genfood.foodgenback.utils.RecipeUtils.recipeIngredients1;
 import static com.genfood.foodgenback.utils.RecipeUtils.updatedRecipe3;
 

@@ -15,6 +15,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import java.util.List;
 import static com.genfood.foodgenback.utils.MealUtils.MEAL1_ID;
 import static com.genfood.foodgenback.utils.MealUtils.meal1;
+import static com.genfood.foodgenback.utils.MealUtils.meal2;
+import static com.genfood.foodgenback.utils.MealUtils.meal3;
 
 
 @Testcontainers
@@ -36,6 +38,13 @@ public class MealIT extends FacadeIT {
     @Test
     void read_meals() {
         List<Meal> actual = mealController.getMeals();
+        log.info(String.valueOf(actual));
+        log.info(String.valueOf(meal1()));
+        log.info(String.valueOf(meal2()));
+        log.info(String.valueOf(meal3()));
+        Assertions.assertTrue(actual.contains(meal1()));
+        Assertions.assertTrue(actual.contains(meal2()));
+        Assertions.assertTrue(actual.contains(meal3()));
         Assertions.assertEquals(3, actual.size());
     }
 

@@ -18,9 +18,6 @@ public class MealUtils {
     public static final String MEAL2_NAME = "meal2_name";
     public static final String MEAL3_NAME = "meal3_name";
     public static final String UPDATED_MEAL3_NAME = "ml3_name";
-    public static final String MEAL1_IMAGE = "test";
-    public static final String MEAL2_IMAGE = "testin";
-    public static final String MEAL3_IMAGE = "testing";
     public static final Integer MEAL1_DOWNLOAD = 10;
     public static final Integer MEAL2_DOWNLOAD = 5;
     public static final Integer MEAL3_DOWNLOAD = 1;
@@ -30,7 +27,7 @@ public class MealUtils {
         return Meal.builder()
                 .id(MEAL1_ID)
                 .name(MEAL1_NAME)
-                .image(MEAL1_IMAGE)
+                .image(null)
                 .download(MEAL1_DOWNLOAD)
                 .region(region1())
                 .recipe(recipe1())
@@ -39,7 +36,7 @@ public class MealUtils {
         return Meal.builder()
                 .id(MEAL2_ID)
                 .name(MEAL2_NAME)
-                .image(MEAL2_IMAGE)
+                .image(null)
                 .download(MEAL2_DOWNLOAD)
                 .region(region2())
                 .recipe(recipe2())
@@ -48,7 +45,7 @@ public class MealUtils {
         return Meal.builder()
                 .id(MEAL3_ID)
                 .name(MEAL3_NAME)
-                .image(MEAL3_IMAGE)
+                .image(null)
                 .download(MEAL3_DOWNLOAD)
                 .region(region3())
                 .recipe(recipe3())
@@ -57,7 +54,7 @@ public class MealUtils {
         return Meal.builder()
                 .id(MEAL3_ID)
                 .name(UPDATED_MEAL3_NAME)
-                .image(MEAL3_IMAGE)
+                .image(null)
                 .download(MEAL3_DOWNLOAD)
                 .region(region3())
                 .recipe(recipe3())

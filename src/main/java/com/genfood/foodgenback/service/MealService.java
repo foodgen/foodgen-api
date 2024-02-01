@@ -18,10 +18,7 @@ public class MealService {
   }
 
   public List<Meal> getRandomMeals() {
-    List<Meal> meals = new ArrayList<>();
-    while (meals.size() < 3) {
-      meals.add(mealRepository.findMealRandomly());
-    }
+    List<Meal> meals = mealRepository.findMealRandomly();
     return meals;
   }
 }

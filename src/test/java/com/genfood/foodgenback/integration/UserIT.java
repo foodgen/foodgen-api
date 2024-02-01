@@ -26,6 +26,7 @@ import static com.genfood.foodgenback.utils.UserUtils.user3;
 
 @Testcontainers
 @Slf4j
+//TODO: test and fix if it doesn't work
 public class UserIT extends FacadeIT {
     UserController userController;
     UserService userService;
