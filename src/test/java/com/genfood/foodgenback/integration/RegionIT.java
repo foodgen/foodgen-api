@@ -4,7 +4,6 @@ import static com.genfood.foodgenback.utils.RegionUtils.REGION1_ID;
 import static com.genfood.foodgenback.utils.RegionUtils.region1;
 import static com.genfood.foodgenback.utils.RegionUtils.region2;
 import static com.genfood.foodgenback.utils.RegionUtils.updatedRegion3;
-
 import com.genfood.foodgenback.conf.FacadeIT;
 import com.genfood.foodgenback.endpoint.controller.RegionController;
 import com.genfood.foodgenback.endpoint.rest.mapper.RegionMapper;

@@ -6,7 +6,6 @@ import com.genfood.foodgenback.endpoint.rest.model.SignUp;
 import com.genfood.foodgenback.endpoint.rest.model.User;
 
 public class UserUtils {
-
   public static final String USER1_ID = "user1_id";
   public static final String USER2_ID = "user2_id";
   public static final String USER3_ID = "user3_id";

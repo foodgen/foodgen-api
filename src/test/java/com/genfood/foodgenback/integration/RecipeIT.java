@@ -1,11 +1,5 @@
 package com.genfood.foodgenback.integration;
 
-import static com.genfood.foodgenback.utils.RecipeUtils.RECIPE1_ID;
-import static com.genfood.foodgenback.utils.RecipeUtils.recipe1;
-import static com.genfood.foodgenback.utils.RecipeUtils.recipe2;
-import static com.genfood.foodgenback.utils.RecipeUtils.recipeIngredients1;
-import static com.genfood.foodgenback.utils.RecipeUtils.updatedRecipe3;
-
 import com.genfood.foodgenback.conf.FacadeIT;
 import com.genfood.foodgenback.endpoint.controller.RecipeController;
 import com.genfood.foodgenback.endpoint.rest.mapper.RecipeIngredientMapper;
@@ -17,13 +11,18 @@ import com.genfood.foodgenback.repository.RecipeRepository;
 import com.genfood.foodgenback.repository.validator.RecipeValidator;
 import com.genfood.foodgenback.service.RecipeIngredientService;
 import com.genfood.foodgenback.service.RecipeService;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import java.util.List;
+import static com.genfood.foodgenback.utils.RecipeUtils.RECIPE1_ID;
+import static com.genfood.foodgenback.utils.RecipeUtils.recipe1;
+import static com.genfood.foodgenback.utils.RecipeUtils.recipe2;
+import static com.genfood.foodgenback.utils.RecipeUtils.recipeIngredients1;
+import static com.genfood.foodgenback.utils.RecipeUtils.updatedRecipe3;
 
 @Testcontainers
 @Slf4j

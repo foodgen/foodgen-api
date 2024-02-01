@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 public class MealMapper {
   private final RecipeMapper recipeMapper;
   private final RegionMapper regionMapper;
-
   public Meal toDto(com.genfood.foodgenback.repository.model.Meal entity) {
     return Meal.builder()
         .id(entity.getId())
