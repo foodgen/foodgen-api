@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+
+import com.genfood.foodgenback.repository.model.exception.BadRequestException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +30,7 @@ public class IngredientValidator implements Consumer<Ingredients> {
     if (!violationMessages.isEmpty()) {
       String formattedViolationMessages =
           violationMessages.stream().map(String::toString).collect(Collectors.joining(""));
-      throw new RuntimeException(formattedViolationMessages);
+      throw new BadRequestException(formattedViolationMessages);
     }
   }
 }
