@@ -539,6 +539,33 @@ paths:
           description: Ressources not found
         '500':
           description: Server error
+  /allergy/{user_id}:
+    get:
+      tags:
+        - allergy
+      summary: Get allergy by user
+      operationId: getAllergyByUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of Allergy
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Allergy'
+        '400':
+          description: Error when sending the request
+        '404':
+          description: Ressources not found
+        '500':
+          description: Server error
 components:
   responses:
     '400':
