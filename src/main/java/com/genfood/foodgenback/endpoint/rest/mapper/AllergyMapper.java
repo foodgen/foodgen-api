@@ -7,14 +7,14 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class AllergyMapper {
-    private final UserMapper userMapper;
-    private final IngredientMapper ingredientMapper;
+  private final UserMapper userMapper;
+  private final IngredientMapper ingredientMapper;
 
-    public Allergy toDto(com.genfood.foodgenback.repository.model.Allergy entity){
-        return Allergy.builder()
-                .id(entity.getId())
-                .user(userMapper.toDto(entity.getUser()))
-                .ingredients(ingredientMapper.toDto(entity.getIngredient()))
-                .build();
-    }
+  public Allergy toDto(com.genfood.foodgenback.repository.model.Allergy entity) {
+    return Allergy.builder()
+        .id(entity.getId())
+        .user(userMapper.toDto(entity.getUser()))
+        .ingredients(ingredientMapper.toDto(entity.getIngredient()))
+        .build();
+  }
 }

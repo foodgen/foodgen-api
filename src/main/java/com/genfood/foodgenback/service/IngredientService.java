@@ -2,7 +2,6 @@ package com.genfood.foodgenback.service;
 
 import com.genfood.foodgenback.repository.IngredientRepository;
 import com.genfood.foodgenback.repository.model.Ingredients;
-import com.genfood.foodgenback.repository.model.exception.NotFoundException;
 import com.genfood.foodgenback.repository.validator.IngredientValidator;
 import java.util.List;
 import lombok.AllArgsConstructor;

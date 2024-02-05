@@ -25,9 +25,12 @@ public class FacadeIT {
 
   @DynamicPropertySource
   static void configureProperties(DynamicPropertyRegistry registry) {
+    String flywayTestdataPath = "classpath:/db/testdata";
+    String tokenSigningKey = "azertyuiopmlkjhgfdswxcvbnnbvcxwmlkjhgfdsqpoiuytrekqjsdkqsjdkqszaaa";
     registry.add("spring.datasource.url", postgres::getJdbcUrl);
     registry.add("spring.datasource.username", postgres::getUsername);
     registry.add("spring.datasource.password", postgres::getPassword);
-    registry.add("token.signing.key", () -> new String("azertyuiopmlkjhgfdswxcvbnnbvcxwmlkjhgfdsqpoiuytrekqjsdkqsjdkqszaaa"));
+    registry.add("token.signing.key", () -> tokenSigningKey);
+    registry.add("spring.flyway.locations", () -> "classpath:/db/migration," + flywayTestdataPath);
   }
 }

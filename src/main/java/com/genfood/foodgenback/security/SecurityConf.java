@@ -3,6 +3,7 @@ package com.genfood.foodgenback.security;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
+
 import com.genfood.foodgenback.endpoint.rest.model.Role;
 import com.genfood.foodgenback.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;

@@ -6,6 +6,7 @@ import static com.genfood.foodgenback.utils.UserUtils.auth4;
 import static com.genfood.foodgenback.utils.UserUtils.signUp4;
 import static com.genfood.foodgenback.utils.UserUtils.updatedUser3;
 import static com.genfood.foodgenback.utils.UserUtils.user1;
+
 import com.genfood.foodgenback.conf.FacadeIT;
 import com.genfood.foodgenback.endpoint.controller.UserController;
 import com.genfood.foodgenback.endpoint.rest.mapper.UserMapper;
@@ -42,13 +43,15 @@ public class UserIT extends FacadeIT {
   @Autowired PasswordEncoder passwordEncoder;
 
   @Autowired JWTService jwtService;
+
   @BeforeEach
   void setUp() {
-      userService = new UserService(userRepository, mailValidator);
-      userDetailsService = new UserDetailsServiceImpl(userService);
-      authService = new AuthService(userService, userDetailsService, jwtService, passwordEncoder);
-      userController = new UserController(userMapper, userService,  authService);
+    userService = new UserService(userRepository, mailValidator);
+    userDetailsService = new UserDetailsServiceImpl(userService);
+    authService = new AuthService(userService, userDetailsService, jwtService, passwordEncoder);
+    userController = new UserController(userMapper, userService, authService);
   }
+
   @Test
   void read_user_by_id() {
     User actual = userController.getByUserName(USER1_USERNAME);

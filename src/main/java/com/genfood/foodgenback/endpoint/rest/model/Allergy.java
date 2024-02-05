@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class Allergy {
-    private String id;
-    private User user;
-    private Ingredients ingredients;
+  private String id;
+  private User user;
+  private Ingredients ingredients;
 }

@@ -21,12 +21,13 @@ import lombok.ToString;
 @Builder
 @EqualsAndHashCode
 public class Allergy {
-    @Id
-    private String id;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-    @ManyToOne
-    @JoinColumn(name = "ingredient_id")
-    private Ingredients ingredient;
+  @Id private String id;
+
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  private User user;
+
+  @ManyToOne
+  @JoinColumn(name = "ingredient_id")
+  private Ingredients ingredient;
 }

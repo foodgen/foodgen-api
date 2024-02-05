@@ -4,6 +4,7 @@ import static com.genfood.foodgenback.utils.MealUtils.MEAL1_ID;
 import static com.genfood.foodgenback.utils.MealUtils.meal1;
 import static com.genfood.foodgenback.utils.MealUtils.meal2;
 import static com.genfood.foodgenback.utils.MealUtils.meal3;
+
 import com.genfood.foodgenback.conf.FacadeIT;
 import com.genfood.foodgenback.endpoint.controller.MealController;
 import com.genfood.foodgenback.endpoint.rest.mapper.MealMapper;
@@ -21,32 +22,29 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 @Slf4j
 public class MealIT extends FacadeIT {
-    MealController mealController;
-    MealService mealService;
-    @Autowired
-    MealMapper mealMapper;
-    @Autowired
-    MealRepository mealRepository;
+  MealController mealController;
+  MealService mealService;
+  @Autowired MealMapper mealMapper;
+  @Autowired MealRepository mealRepository;
 
-    @BeforeEach
-    void setUp() {
-        mealService = new MealService(mealRepository);
-        mealController = new MealController(mealService, mealMapper);
-    }
+  @BeforeEach
+  void setUp() {
+    mealService = new MealService(mealRepository);
+    mealController = new MealController(mealService, mealMapper);
+  }
 
-    @Test
-    void read_meals() {
-        List<Meal> actual = mealController.getMeals();
-        Assertions.assertTrue(actual.contains(meal1()));
-        Assertions.assertTrue(actual.contains(meal2()));
-        Assertions.assertTrue(actual.contains(meal3()));
-        Assertions.assertEquals(3, actual.size());
-    }
+  @Test
+  void read_meals() {
+    List<Meal> actual = mealController.getMeals();
+    Assertions.assertTrue(actual.contains(meal1()));
+    Assertions.assertTrue(actual.contains(meal2()));
+    Assertions.assertTrue(actual.contains(meal3()));
+    Assertions.assertEquals(3, actual.size());
+  }
 
-    @Test
-    void read_meal_by_id() {
-        Meal actual = mealController.getMealById(MEAL1_ID);
-        Assertions.assertEquals(meal1(), actual);
-    }
-
+  @Test
+  void read_meal_by_id() {
+    Meal actual = mealController.getMealById(MEAL1_ID);
+    Assertions.assertEquals(meal1(), actual);
+  }
 }
