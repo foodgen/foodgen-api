@@ -22,7 +22,11 @@ public class MailValidator implements Consumer<User> {
 
   @Override
   public void accept(User user) {
-    boolean alreadyExist = userRepository.existsByEmail(user.getEmail());
+    boolean alreadyExist = false;
+    if (userRepository.existsByEmail(user.getEmail())
+        && user.getId().compareTo(userRepository.findByEmail(user.getEmail()).get().getId()) == 1) {
+      alreadyExist = true;
+    }
     Set<String> violationMessages = new HashSet<>();
     if (alreadyExist) {
       violationMessages.add("Mail address already taken,try other");

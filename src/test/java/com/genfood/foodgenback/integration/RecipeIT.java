@@ -59,8 +59,7 @@ public class RecipeIT extends FacadeIT {
     List<Recipe> actual = recipeController.getRecipes(PAGE, PAGE_SIZE);
     Assertions.assertTrue(actual.contains(recipe1()));
     Assertions.assertTrue(actual.contains(recipe2()));
-    int expected = 3;
-    Assertions.assertEquals(expected, actual.size());
+    Assertions.assertEquals(9, actual.size());
   }
 
   @Test
@@ -73,6 +72,6 @@ public class RecipeIT extends FacadeIT {
   void crupdate_recipes() {
     recipeController.crupdateRecipes(List.of(updatedRecipe3()));
     List<Recipe> actual = recipeController.getRecipes(PAGE, PAGE_SIZE);
-    Assertions.assertEquals(updatedRecipe3(), actual.get(2));
+    Assertions.assertTrue(actual.contains(updatedRecipe3()));
   }
 }

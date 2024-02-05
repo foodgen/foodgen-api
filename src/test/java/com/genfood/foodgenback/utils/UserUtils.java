@@ -88,7 +88,7 @@ public class UserUtils {
         .firstname(USER3_FIRSTNAME)
         .lastname(USER3_LASTNAME)
         .email(USER3_EMAIL)
-        .password(USER3_PASSWORD)
+        .password("$2a$10$pAHpLu4suWA9UGGMGB6ZbO5ZT64Q8KrfEoHCghcmq/G5LJbY./Yxa")
         .role(Role.valueOf(USER3_ROLE))
         .build();
   }

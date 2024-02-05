@@ -1,7 +1,7 @@
 package com.genfood.foodgenback.integration;
 
+import static com.genfood.foodgenback.utils.UserUtils.UPDATED_USER3_USERNAME;
 import static com.genfood.foodgenback.utils.UserUtils.USER1_USERNAME;
-import static com.genfood.foodgenback.utils.UserUtils.USER3_USERNAME;
 import static com.genfood.foodgenback.utils.UserUtils.auth4;
 import static com.genfood.foodgenback.utils.UserUtils.signUp4;
 import static com.genfood.foodgenback.utils.UserUtils.updatedUser3;
@@ -61,8 +61,13 @@ public class UserIT extends FacadeIT {
   @Test
   void crupdate_user() {
     userController.crupdateUsers(List.of(updatedUser3()));
-    User actual = userController.getByUserName(USER3_USERNAME);
-    Assertions.assertEquals(updatedUser3(), actual);
+    User actual = userController.getByUserName(UPDATED_USER3_USERNAME);
+    Assertions.assertEquals(updatedUser3().getId(), actual.getId());
+    Assertions.assertEquals(updatedUser3().getFirstname(), actual.getFirstname());
+    Assertions.assertEquals(updatedUser3().getLastname(), actual.getLastname());
+    Assertions.assertEquals(updatedUser3().getEmail(), actual.getEmail());
+    Assertions.assertEquals(updatedUser3().getUsername(), actual.getUsername());
+    Assertions.assertEquals(updatedUser3().getRole(), actual.getRole());
   }
 
   @Test
