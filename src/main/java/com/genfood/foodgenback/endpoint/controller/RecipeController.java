@@ -9,10 +9,15 @@ import com.genfood.foodgenback.service.RecipeService;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @AllArgsConstructor
 @CrossOrigin(origins = "*")
 public class RecipeController {
@@ -42,10 +47,10 @@ public class RecipeController {
   public List<Recipe> crupdateRecipes(@RequestBody List<Recipe> recipes) {
     List<com.genfood.foodgenback.repository.model.Recipe> toSave =
         recipes.stream().map(recipeMapper::toEntity).collect(Collectors.toUnmodifiableList());
-    List<Recipe> update =
+    List<Recipe> updatedRecipes =
         recipeService.saveRecipes(toSave).stream()
             .map(recipeMapper::toDto)
             .collect(Collectors.toUnmodifiableList());
-    return update;
+    return updatedRecipes;
   }
 }

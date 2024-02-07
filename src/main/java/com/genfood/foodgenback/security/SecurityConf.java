@@ -1,9 +1,6 @@
 package com.genfood.foodgenback.security;
 
 import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.http.HttpMethod.PUT;
-
 import com.genfood.foodgenback.endpoint.rest.model.Role;
 import com.genfood.foodgenback.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
@@ -21,9 +18,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @AllArgsConstructor
@@ -48,19 +42,19 @@ public class SecurityConf {
             auth ->
                 auth.requestMatchers(GET, "/ping")
                     .permitAll()
-                    .requestMatchers( "/users/signup")
+                    .requestMatchers("/users/signup")
                     .permitAll()
-                    .requestMatchers( "/users/login")
+                    .requestMatchers("/users/login")
                     .permitAll()
-                    .requestMatchers( "/users/whoami")
+                    .requestMatchers("/users/whoami")
                     .authenticated()
-                    .requestMatchers( "/users/**")
+                    .requestMatchers("/users/**")
                     .hasAnyRole(String.valueOf(Role.ADMIN))
-                    .requestMatchers( "/regions")
+                    .requestMatchers("/regions")
                     .hasAnyRole(String.valueOf(Role.ADMIN))
-                    .requestMatchers( "/recipes")
+                    .requestMatchers("/recipes")
                     .hasAnyRole(String.valueOf(Role.ADMIN))
-                    .requestMatchers( "/users/**")
+                    .requestMatchers("/users/**")
                     .hasAnyRole(String.valueOf(Role.ADMIN))
                     .requestMatchers("/regions/**")
                     .hasAnyRole(String.valueOf(Role.ADMIN))

@@ -7,13 +7,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @AllArgsConstructor
 @CrossOrigin(origins = "*")
 public class MealController {
@@ -28,10 +28,12 @@ public class MealController {
             .collect(Collectors.toUnmodifiableList());
     return meals;
   }
+
   @GetMapping("/mealsByRating")
-  public List<Meal> getMealsOrdered(@RequestParam("page") Integer page, @RequestParam("page_size") Integer pageSize){
-    List<Meal> meals = mealService.getMealByRating(page, pageSize).stream()
-            .map(mealMapper::toDto).toList();
+  public List<Meal> getMealsOrdered(
+      @RequestParam("page") Integer page, @RequestParam("page_size") Integer pageSize) {
+    List<Meal> meals =
+        mealService.getMealByRating(page, pageSize).stream().map(mealMapper::toDto).toList();
     return meals;
   }
 

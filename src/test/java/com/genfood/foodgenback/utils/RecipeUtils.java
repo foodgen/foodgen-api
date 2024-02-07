@@ -2,6 +2,7 @@ package com.genfood.foodgenback.utils;
 
 import static com.genfood.foodgenback.utils.IngredientUtils.ig1;
 import static com.genfood.foodgenback.utils.IngredientUtils.ig2;
+
 import com.genfood.foodgenback.endpoint.rest.model.Recipe;
 import com.genfood.foodgenback.endpoint.rest.model.RecipeIngredients;
 import java.util.List;

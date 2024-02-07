@@ -28,7 +28,7 @@ public class MealService {
     return mealRepository.findById(id).get();
   }
 
-  public List<Meal> getMealByRating(Integer page, Integer pageSize){
+  public List<Meal> getMealByRating(Integer page, Integer pageSize) {
     Pageable pageable = PageRequest.of(page, pageSize);
     return mealRepository.findAllOrderByDownload(pageable);
   }
@@ -37,24 +37,30 @@ public class MealService {
     User user = service.whoami(request);
     List<Allergy> allergies = allergyService.findAllergyByUserId(user.getId());
     List<Meal> meals = new ArrayList<>();
-    while (meals.size() < 3) {
-      boolean badIngredient = false;
-      Meal meal = mealRepository.findMealRandomly();
-      List<Ingredients> mealIngredients =
-          recipeIngredientMapper
-              .toDto(recipeIngredientService.getAllByRecipeId(meal.getRecipe().getId()))
-              .getIngredients();
-      for (Allergy allergy : allergies) {
-        for (int i = 0; i < mealIngredients.size(); i++) {
-          if (allergy.getIngredient().equals(mealIngredients.get(i))) {
-            badIngredient = true;
+    if (allergies.size() == 0) {
+      meals.add(mealRepository.findMealRandomly());
+      meals.add(mealRepository.findMealRandomly());
+      meals.add(mealRepository.findMealRandomly());
+    } else {
+      while (meals.size() < 3) {
+        boolean badIngredient = false;
+        Meal meal = mealRepository.findMealRandomly();
+        List<Ingredients> mealIngredients =
+            recipeIngredientMapper
+                .toDto(recipeIngredientService.getAllByRecipeId(meal.getRecipe().getId()))
+                .getIngredients();
+        for (Allergy allergy : allergies) {
+          for (int i = 0; i < mealIngredients.size(); i++) {
+            if (allergy.getIngredient().equals(mealIngredients.get(i))) {
+              badIngredient = true;
+            }
           }
         }
-      }
-      if (badIngredient) {
-        meals.add(meal);
-      } else {
-        badIngredient = false;
+        if (badIngredient) {
+          meals.add(meal);
+        } else {
+          badIngredient = false;
+        }
       }
     }
     return meals;

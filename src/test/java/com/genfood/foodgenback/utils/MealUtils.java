@@ -1,6 +1,14 @@
 package com.genfood.foodgenback.utils;
 
-import static com.genfood.foodgenback.utils.RecipeUtils.*;
+import static com.genfood.foodgenback.utils.RecipeUtils.recipe1;
+import static com.genfood.foodgenback.utils.RecipeUtils.recipe2;
+import static com.genfood.foodgenback.utils.RecipeUtils.recipe3;
+import static com.genfood.foodgenback.utils.RecipeUtils.recipe4;
+import static com.genfood.foodgenback.utils.RecipeUtils.recipe5;
+import static com.genfood.foodgenback.utils.RecipeUtils.recipe6;
+import static com.genfood.foodgenback.utils.RecipeUtils.recipe7;
+import static com.genfood.foodgenback.utils.RecipeUtils.recipe8;
+import static com.genfood.foodgenback.utils.RecipeUtils.recipe9;
 import static com.genfood.foodgenback.utils.RegionUtils.region1;
 import static com.genfood.foodgenback.utils.RegionUtils.region2;
 import static com.genfood.foodgenback.utils.RegionUtils.region3;
@@ -70,65 +78,71 @@ public class MealUtils {
         .recipe(recipe3())
         .build();
   }
+
   public static Meal meal4() {
     return Meal.builder()
-            .id(MEAL4_ID)
-            .name(MEAL4_NAME)
-            .image(null)
-            .download(MEAL4_DOWNLOAD)
-            .region(region3())
-            .recipe(recipe4())
-            .build();
+        .id(MEAL4_ID)
+        .name(MEAL4_NAME)
+        .image(null)
+        .download(MEAL4_DOWNLOAD)
+        .region(region3())
+        .recipe(recipe4())
+        .build();
   }
+
   public static Meal meal5() {
     return Meal.builder()
-            .id(MEAL5_ID)
-            .name(MEAL5_NAME)
-            .image(null)
-            .download(MEAL5_DOWNLOAD)
-            .region(region2())
-            .recipe(recipe5())
-            .build();
+        .id(MEAL5_ID)
+        .name(MEAL5_NAME)
+        .image(null)
+        .download(MEAL5_DOWNLOAD)
+        .region(region2())
+        .recipe(recipe5())
+        .build();
   }
+
   public static Meal meal6() {
     return Meal.builder()
-            .id(MEAL6_ID)
-            .name(MEAL6_NAME)
-            .image(null)
-            .download(MEAL6_DOWNLOAD)
-            .region(region1())
-            .recipe(recipe6())
-            .build();
+        .id(MEAL6_ID)
+        .name(MEAL6_NAME)
+        .image(null)
+        .download(MEAL6_DOWNLOAD)
+        .region(region1())
+        .recipe(recipe6())
+        .build();
   }
+
   public static Meal meal7() {
     return Meal.builder()
-            .id(MEAL7_ID)
-            .name(MEAL7_NAME)
-            .image(null)
-            .download(MEAL7_DOWNLOAD)
-            .region(region1())
-            .recipe(recipe7())
-            .build();
+        .id(MEAL7_ID)
+        .name(MEAL7_NAME)
+        .image(null)
+        .download(MEAL7_DOWNLOAD)
+        .region(region1())
+        .recipe(recipe7())
+        .build();
   }
+
   public static Meal meal8() {
     return Meal.builder()
-            .id(MEAL8_ID)
-            .name(MEAL8_NAME)
-            .image(null)
-            .download(MEAL8_DOWNLOAD)
-            .region(region2())
-            .recipe(recipe8())
-            .build();
+        .id(MEAL8_ID)
+        .name(MEAL8_NAME)
+        .image(null)
+        .download(MEAL8_DOWNLOAD)
+        .region(region2())
+        .recipe(recipe8())
+        .build();
   }
+
   public static Meal meal9() {
     return Meal.builder()
-            .id(MEAL9_ID)
-            .name(MEAL9_NAME)
-            .image(null)
-            .download(MEAL9_DOWNLOAD)
-            .region(region3())
-            .recipe(recipe9())
-            .build();
+        .id(MEAL9_ID)
+        .name(MEAL9_NAME)
+        .image(null)
+        .download(MEAL9_DOWNLOAD)
+        .region(region3())
+        .recipe(recipe9())
+        .build();
   }
 
   public static Meal updatedMeal3() {
