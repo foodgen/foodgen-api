@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 public class AllergyController {
   private final AllergyService allergyService;
   private final AllergyMapper allergyMapper;

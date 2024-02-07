@@ -21,6 +21,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @AllArgsConstructor
@@ -45,21 +48,21 @@ public class SecurityConf {
             auth ->
                 auth.requestMatchers(GET, "/ping")
                     .permitAll()
-                    .requestMatchers(POST, "/users/signup")
+                    .requestMatchers( "/users/signup")
                     .permitAll()
-                    .requestMatchers(POST, "/users/login")
+                    .requestMatchers( "/users/login")
                     .permitAll()
-                    .requestMatchers(GET, "/users/whoami")
+                    .requestMatchers( "/users/whoami")
                     .authenticated()
-                    .requestMatchers(PUT, "/users/**")
+                    .requestMatchers( "/users/**")
                     .hasAnyRole(String.valueOf(Role.ADMIN))
-                    .requestMatchers(PUT, "/regions")
+                    .requestMatchers( "/regions")
                     .hasAnyRole(String.valueOf(Role.ADMIN))
-                    .requestMatchers(PUT, "/recipes")
+                    .requestMatchers( "/recipes")
                     .hasAnyRole(String.valueOf(Role.ADMIN))
-                    .requestMatchers(GET, "/users/**")
+                    .requestMatchers( "/users/**")
                     .hasAnyRole(String.valueOf(Role.ADMIN))
-                    .requestMatchers(GET, "/regions/**")
+                    .requestMatchers("/regions/**")
                     .hasAnyRole(String.valueOf(Role.ADMIN))
                     .anyRequest()
                     .authenticated())
