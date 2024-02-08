@@ -47,7 +47,7 @@ public class SecurityConf {
                     .requestMatchers("/users/login")
                     .permitAll()
                     .requestMatchers("/users/whoami")
-                    .authenticated()
+                    .permitAll()
                     .requestMatchers("/users/**")
                     .hasAnyRole(String.valueOf(Role.ADMIN))
                     .requestMatchers("/regions")
@@ -59,7 +59,7 @@ public class SecurityConf {
                     .requestMatchers("/regions/**")
                     .hasAnyRole(String.valueOf(Role.ADMIN))
                     .anyRequest()
-                    .authenticated())
+                    .permitAll())
         .authenticationManager(authenticationManager)
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
         .build();

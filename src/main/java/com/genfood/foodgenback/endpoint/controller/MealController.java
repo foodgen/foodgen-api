@@ -37,7 +37,7 @@ public class MealController {
     return meals;
   }
 
-  @GetMapping("/meals/{id}")
+  @GetMapping("/meal/{id}")
   public Meal getMealById(@PathVariable String id) {
     return mealMapper.toDto(mealService.getMealById(id));
   }

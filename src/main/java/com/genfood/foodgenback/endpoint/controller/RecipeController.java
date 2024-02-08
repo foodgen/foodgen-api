@@ -36,7 +36,7 @@ public class RecipeController {
     return recipes;
   }
 
-  @GetMapping("/recipe/{id}")
+  @GetMapping("/recipes/{id}")
   public RecipeIngredients getRecipeById(@PathVariable String id) {
     RecipeIngredients recipe =
         recipeIngredientMapper.toDto(recipeIngredientService.getAllByRecipeId(id));
