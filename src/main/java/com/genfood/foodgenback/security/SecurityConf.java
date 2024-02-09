@@ -2,7 +2,6 @@ package com.genfood.foodgenback.security;
 
 import static org.springframework.http.HttpMethod.GET;
 
-import com.genfood.foodgenback.endpoint.rest.model.Role;
 import com.genfood.foodgenback.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
