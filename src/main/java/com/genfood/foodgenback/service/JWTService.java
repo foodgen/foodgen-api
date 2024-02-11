@@ -1,6 +1,7 @@
 package com.genfood.foodgenback.service;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -8,11 +9,14 @@ import io.jsonwebtoken.security.Keys;
 import java.util.Date;
 import java.util.function.Function;
 import javax.crypto.SecretKey;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class JWTService {
   @Value("${token.signing.key}")
   private String jwtSigningKey;
@@ -51,7 +55,16 @@ public class JWTService {
   }
 
   private Claims extractAllClaims(String token) {
-    return Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token).getPayload();
+    try {
+      return Jwts.parser()
+          .verifyWith(getSigningKey())
+          .build()
+          .parseSignedClaims(token)
+          .getPayload();
+    } catch (JwtException e) {
+      log.error("Message if expired: " + e.getMessage());
+      throw new BadCredentialsException("Expired Token");
+    }
   }
 
   // jwt signing key is BASE64 encoded

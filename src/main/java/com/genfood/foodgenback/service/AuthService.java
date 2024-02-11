@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +30,7 @@ public class AuthService {
     String email = toAuthenticate.getEmail();
     UserDetails principal = userDetailsServiceImpl.loadUserByUsername(email);
     if (!passwordEncoder.matches(toAuthenticate.getPassword(), principal.getPassword())) {
-      throw new UsernameNotFoundException("Wrong Password!");
+      throw new BadCredentialsException("Wrong Password!");
     }
     return jwtService.generateToken(principal);
   }
