@@ -1,7 +1,9 @@
 package com.genfood.foodgenback.security;
 
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.PUT;
 
+import com.genfood.foodgenback.endpoint.rest.model.Role;
 import com.genfood.foodgenback.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -42,22 +44,38 @@ public class SecurityConf {
             auth ->
                 auth.requestMatchers(GET, "/ping")
                     .permitAll()
-                        .requestMatchers("/users/**")
-                        .permitAll()
-                    .requestMatchers("/regions/**")
-                        .authenticated()
-                    .requestMatchers("/recipes/**")
+                    .requestMatchers("/users/signup")
+                    .permitAll()
+                    .requestMatchers("/users/login")
+                    .permitAll()
+                    .requestMatchers("/users/whoami")
                     .authenticated()
-                        .requestMatchers("/meals/**")
-                        .authenticated()
-                        .requestMatchers("/allergy")
-                        .authenticated()
-                        .requestMatchers("/allergy/**")
-                        .authenticated()
-                        .requestMatchers("/ingredients/**")
-                        .authenticated()
+                    .requestMatchers(GET, "/users/**")
+                    .hasAnyRole(String.valueOf(Role.ADMIN))
+                    .requestMatchers(PUT, "/users/**")
+                    .hasAnyRole(String.valueOf(Role.ADMIN))
+                    .requestMatchers(GET, "/regions")
+                    .authenticated()
+                    .requestMatchers(PUT, "/regions/**")
+                    .hasAnyRole(String.valueOf(Role.ADMIN))
+                    .requestMatchers(GET, "/recipes/**")
+                    .authenticated()
+                    .requestMatchers(PUT, "/recipes/**")
+                    .hasAnyRole(String.valueOf(Role.ADMIN))
+                    .requestMatchers(GET, "/meals/**")
+                    .authenticated()
+                    .requestMatchers(PUT, "/meals/**")
+                    .hasAnyRole(String.valueOf(Role.ADMIN))
+                    .requestMatchers(GET, "/allergy")
+                    .authenticated()
+                    .requestMatchers(PUT, "/allergy/**")
+                    .hasAnyRole(String.valueOf(Role.ADMIN))
+                    .requestMatchers(GET, "/ingredients/**")
+                    .authenticated()
+                    .requestMatchers(GET, "/ingredients/**")
+                    .hasAnyRole(String.valueOf(Role.ADMIN))
                     .anyRequest()
-                    .permitAll())
+                    .authenticated())
         .authenticationManager(authenticationManager)
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
