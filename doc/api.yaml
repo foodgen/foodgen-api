@@ -30,7 +30,6 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-
   '/users':
     put:
       tags:
@@ -115,7 +114,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Auth'
+              $ref: '#/components/schemas/CreateUser'
       responses:
         '200':
           description: Logged in
@@ -659,17 +658,24 @@ components:
         - $ref: '#/components/schemas/Auth'
       type: object
       properties:
-        first_name:
+        firstname:
           type: string
           example: "Rio"
-        last_name:
+        lastname:
           type: string
           example: "Camero"
-        email:
+        username:
           type: string
-          example: rio@email.com
         password:
           type: string
+        Allergies:
+          type: array
+          items:
+            type: string
+        Preferences:
+          type: array
+          items:
+            type: string
     User:
       allOf:
         - $ref: '#/components/schemas/CreateUser'
@@ -678,10 +684,15 @@ components:
         id:
           type: string
           format: uuid
+        role:
+          type: string
+          enum:
+            - USER
+            - ADMIN
     Auth:
       type: object
       properties:
-        username:
+        email:
           type: string
         password:
           type: string
