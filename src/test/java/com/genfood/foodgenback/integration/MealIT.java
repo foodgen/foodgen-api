@@ -13,18 +13,10 @@ import com.genfood.foodgenback.endpoint.rest.mapper.MealMapper;
 import com.genfood.foodgenback.endpoint.rest.mapper.RecipeIngredientMapper;
 import com.genfood.foodgenback.endpoint.rest.mapper.UserMapper;
 import com.genfood.foodgenback.endpoint.rest.model.Meal;
-import com.genfood.foodgenback.repository.AllergyRepository;
-import com.genfood.foodgenback.repository.IngredientRepository;
-import com.genfood.foodgenback.repository.MealRepository;
-import com.genfood.foodgenback.repository.UserRepository;
+import com.genfood.foodgenback.repository.*;
 import com.genfood.foodgenback.repository.validator.MailValidator;
-import com.genfood.foodgenback.service.AllergyService;
-import com.genfood.foodgenback.service.AuthService;
-import com.genfood.foodgenback.service.JWTService;
-import com.genfood.foodgenback.service.MealService;
-import com.genfood.foodgenback.service.RecipeIngredientService;
-import com.genfood.foodgenback.service.UserDetailsServiceImpl;
-import com.genfood.foodgenback.service.UserService;
+import com.genfood.foodgenback.service.*;
+
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
@@ -48,6 +40,8 @@ public class MealIT extends FacadeIT {
   AuthService authService;
   AllergyService allergyService;
   UserService userService;
+
+  UserPreferencesService userPreferencesService;
   UserDetailsServiceImpl userDetailsService;
 
   MockHttpServletRequest request;
@@ -58,7 +52,8 @@ public class MealIT extends FacadeIT {
   @Autowired MealRepository mealRepository;
   @Autowired RecipeIngredientMapper recipeIngredientMapper;
   @Autowired UserRepository userRepository;
-
+  @Autowired
+  UserPreferencesRepository userPreferencesRepository;
   @Autowired IngredientRepository ingredientRepository;
   @Autowired MailValidator mailValidator;
   @Autowired PasswordEncoder passwordEncoder;
@@ -66,6 +61,7 @@ public class MealIT extends FacadeIT {
 
   @BeforeEach
   void setUp() {
+    userPreferencesService = new UserPreferencesService(userPreferencesRepository);
     userService = new UserService(userRepository, mailValidator);
     userDetailsService = new UserDetailsServiceImpl(userService);
     authService = new AuthService(userService, userDetailsService, jwtService, passwordEncoder);
@@ -78,7 +74,7 @@ public class MealIT extends FacadeIT {
             recipeIngredientService,
             authService,
             allergyService,
-            recipeIngredientMapper);
+            recipeIngredientMapper,userPreferencesService);
     mealController = new MealController(mealService, mealMapper);
   }
 
