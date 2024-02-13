@@ -23,15 +23,15 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserPreference {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private String id;
 
-    @ManyToOne
-    @JoinColumn(name = "ingredient_id")
-    private Ingredients ingredient;
+  @ManyToOne
+  @JoinColumn(name = "ingredient_id")
+  private Ingredients ingredient;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  private User user;
 }

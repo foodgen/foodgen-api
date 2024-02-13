@@ -35,15 +35,15 @@ public class MealService {
     return mealRepository.findAllOrderByDownload(pageable);
   }
 
-  public Meal getMealByPreferences(User user, Meal meal){
+  public Meal getMealByPreferences(User user, Meal meal) {
     List<UserPreference> preferences = userPreferencesService.getPreferencesByUser(user);
     List<Ingredients> mealIngredients =
-            recipeIngredientMapper
-                    .toDto(recipeIngredientService.getAllByRecipeId(meal.getRecipe().getId()))
-                    .getIngredients();
-    for (UserPreference userPreference: preferences) {
-      for(int i = 0; i < mealIngredients.size(); i++){
-        if(userPreference.getIngredient().getName() == mealIngredients.get(i).getName()){
+        recipeIngredientMapper
+            .toDto(recipeIngredientService.getAllByRecipeId(meal.getRecipe().getId()))
+            .getIngredients();
+    for (UserPreference userPreference : preferences) {
+      for (int i = 0; i < mealIngredients.size(); i++) {
+        if (userPreference.getIngredient().getName() == mealIngredients.get(i).getName()) {
           return meal;
         }
       }
@@ -51,12 +51,12 @@ public class MealService {
     return new Meal();
   }
 
-  public Meal getMealWithoutAllergy(User user,Meal meal){
+  public Meal getMealWithoutAllergy(User user, Meal meal) {
     List<Allergy> allergies = allergyService.findAllergyByUserId(user.getId());
     List<Ingredients> mealIngredients =
-            recipeIngredientMapper
-                    .toDto(recipeIngredientService.getAllByRecipeId(meal.getRecipe().getId()))
-                    .getIngredients();
+        recipeIngredientMapper
+            .toDto(recipeIngredientService.getAllByRecipeId(meal.getRecipe().getId()))
+            .getIngredients();
     for (Allergy allergy : allergies) {
       for (int i = 0; i < mealIngredients.size(); i++) {
         if (allergy.getIngredient().equals(mealIngredients.get(i))) {
@@ -73,18 +73,18 @@ public class MealService {
     List<Allergy> allergies = allergyService.findAllergyByUserId(user.getId());
     List<Meal> meals = new ArrayList<>();
     if (allergies.size() == 0) {
-      while(meals.size() < 3) {
-        Meal meal = getMealByPreferences(user,mealRepository.findMealRandomly());
-        if(meal.getId() != null){
+      while (meals.size() < 3) {
+        Meal meal = getMealByPreferences(user, mealRepository.findMealRandomly());
+        if (meal.getId() != null) {
           meals.add(meal);
         }
       }
     } else {
       while (meals.size() < 3) {
-        Meal mealByPreferences = getMealByPreferences(user,mealRepository.findMealRandomly());
-        if(mealByPreferences.getId() != null){
-          Meal mealWoutAllergy = getMealWithoutAllergy(user,mealByPreferences);
-          if(mealWoutAllergy != null){
+        Meal mealByPreferences = getMealByPreferences(user, mealRepository.findMealRandomly());
+        if (mealByPreferences.getId() != null) {
+          Meal mealWoutAllergy = getMealWithoutAllergy(user, mealByPreferences);
+          if (mealWoutAllergy != null) {
             meals.add(mealWoutAllergy);
           }
         }
