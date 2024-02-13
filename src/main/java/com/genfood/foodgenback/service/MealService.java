@@ -72,19 +72,18 @@ public class MealService {
     List<UserPreference> preferences = userPreferencesService.getPreferencesByUser(user);
     List<Allergy> allergies = allergyService.findAllergyByUserId(user.getId());
     List<Meal> meals = new ArrayList<>();
-    if(preferences.size() == 0 && allergies.size() == 0){
+    if (preferences.size() == 0 && allergies.size() == 0) {
       meals.add(mealRepository.findMealRandomly());
       meals.add(mealRepository.findMealRandomly());
       meals.add(mealRepository.findMealRandomly());
-    }
-    else if (preferences.size() > 0 && allergies.size() == 0) {
+    } else if (preferences.size() > 0 && allergies.size() == 0) {
       while (meals.size() < 3) {
         Meal meal = getMealByPreferences(user, mealRepository.findMealRandomly());
         if (meal.getId() != null) {
           meals.add(meal);
         }
       }
-    } else if(preferences.size() == 0){
+    } else if (preferences.size() == 0) {
       while (meals.size() < 3) {
         Meal mealByPreferences = getMealByPreferences(user, mealRepository.findMealRandomly());
         if (mealByPreferences.getId() != null) {
