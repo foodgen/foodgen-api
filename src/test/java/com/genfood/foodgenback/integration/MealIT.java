@@ -12,11 +12,7 @@ import com.genfood.foodgenback.endpoint.rest.mapper.MealMapper;
 import com.genfood.foodgenback.endpoint.rest.mapper.RecipeIngredientMapper;
 import com.genfood.foodgenback.endpoint.rest.mapper.UserMapper;
 import com.genfood.foodgenback.endpoint.rest.model.Meal;
-import com.genfood.foodgenback.repository.AllergyRepository;
-import com.genfood.foodgenback.repository.IngredientRepository;
-import com.genfood.foodgenback.repository.MealRepository;
-import com.genfood.foodgenback.repository.UserPreferencesRepository;
-import com.genfood.foodgenback.repository.UserRepository;
+import com.genfood.foodgenback.repository.*;
 import com.genfood.foodgenback.repository.validator.MailValidator;
 import java.util.List;
 import com.genfood.foodgenback.service.AllergyService;
@@ -66,9 +62,12 @@ public class MealIT extends FacadeIT {
   @Autowired MailValidator mailValidator;
   @Autowired PasswordEncoder passwordEncoder;
   @Autowired JWTService jwtService;
+  @Autowired
+  RecipeIngredientRepository recipeIngredientRepository;
 
   @BeforeEach
   void setUp() {
+    recipeIngredientService = new RecipeIngredientService(recipeIngredientRepository);
     userPreferencesService = new UserPreferencesService(userPreferencesRepository);
     userService = new UserService(userRepository, mailValidator);
     userDetailsService = new UserDetailsServiceImpl(userService);
