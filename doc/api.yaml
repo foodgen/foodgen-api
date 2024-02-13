@@ -727,6 +727,15 @@ components:
         id:
           type: string
           format: uuid
+    UserPreferences :
+      type: object
+      properties:
+        id:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+        ingredients:
+          $ref: '#/components/schemas/Ingredient'
     CreateIngredient:
       type: object
       properties:
