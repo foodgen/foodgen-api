@@ -489,6 +489,44 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
+  '/mealsByCriteria':
+    get:
+      tags:
+        - Meal
+      summary: Get a list of meals by criteria
+      operationId: getMealsByCriteria
+      parameters:
+        - name: region_name
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "France"
+        - name: ingredients
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              example: "tomato"
+      responses:
+        '200':
+          description: return a list of  meals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Meal'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
   '/meal/{id}':
     get:
       tags:
@@ -606,15 +644,15 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  /allergy:
+  /allergies:
     get:
       tags:
-        - allergy
-      summary: Get user allergy
-      operationId: getAllergy
+        - Allergies
+      summary: Get user's allergies
+      operationId: getAllergies
       responses:
         '200':
-          description: List of Allergy
+          description: List of Allergies
           content:
             application/json:
               schema:
@@ -624,12 +662,12 @@ paths:
         '400':
           description: Error when sending the request
         '404':
-          description: Ressources not found
+          description: Resources not found
         '500':
           description: Server error
     put:
       tags:
-        - allergy
+        - Allergies
       summary: Insert allergies for an user
       operationId: crupdateAllergies
       requestBody:
@@ -656,12 +694,12 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  /allergy/{user_id}:
+  /allergies/{user_id}:
     get:
       tags:
-        - allergy
+        - Allergies
       summary: Get allergy by user
-      operationId: getAllergyByUser
+      operationId: getAllergiesByUser
       parameters:
         - name: user_id
           in: path
@@ -670,7 +708,7 @@ paths:
             type: string
       responses:
         '200':
-          description: List of Allergy
+          description: List of Allergies
           content:
             application/json:
               schema:
@@ -725,11 +763,11 @@ components:
           type: string
         password:
           type: string
-        Allergies:
+        allergies:
           type: array
           items:
             type: string
-        Preferences:
+        preferences:
           type: array
           items:
             type: string
@@ -813,10 +851,8 @@ components:
         id:
           type: string
           format: uuid
-        user:
-          $ref: '#/components/schemas/User'
-        ingredient:
-          $ref: '#/components/schemas/Ingredient'
+        ingredient_name:
+          type: string
     RecipeIngredients:
       type: object
       properties:

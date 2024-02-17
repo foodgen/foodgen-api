@@ -5,6 +5,7 @@ import com.genfood.foodgenback.repository.model.exception.BadRequestException;
 import com.genfood.foodgenback.repository.model.exception.ForbiddenException;
 import com.genfood.foodgenback.repository.model.exception.NotFoundException;
 import io.jsonwebtoken.JwtException;
+import java.sql.SQLException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
@@ -21,12 +22,7 @@ import org.springframework.web.client.HttpServerErrorException;
 public class RestExceptionHandler {
 
   @ExceptionHandler(
-      value = {
-        BadRequestException.class,
-        DuplicateKeyException.class,
-        JwtException.class,
-        BadCredentialsException.class
-      })
+      value = {BadRequestException.class, DuplicateKeyException.class, JwtException.class})
   ResponseEntity<Exception> handleBadRequest(java.lang.Exception e) {
     log.info(e.getClass().getSimpleName(), e);
     Exception restException =
@@ -37,7 +33,12 @@ public class RestExceptionHandler {
     return new ResponseEntity<>(restException, HttpStatus.BAD_REQUEST);
   }
 
-  @ExceptionHandler(value = {AccessDeniedException.class, ForbiddenException.class})
+  @ExceptionHandler(
+      value = {
+        AccessDeniedException.class,
+        ForbiddenException.class,
+        BadCredentialsException.class
+      })
   ResponseEntity<Exception> handleForbidden(java.lang.Exception e) {
     log.info(e.getClass().getSimpleName(), e);
     Exception restException =
@@ -59,7 +60,7 @@ public class RestExceptionHandler {
     return new ResponseEntity<>(restException, HttpStatus.NOT_FOUND);
   }
 
-  @ExceptionHandler(value = {java.lang.Exception.class})
+  @ExceptionHandler(value = {java.lang.Exception.class, SQLException.class})
   ResponseEntity<Exception> handleDefault(java.lang.Exception e) {
     log.error("Internal error", e);
     Exception restException =
