@@ -16,7 +16,7 @@ But there are also some dependencies that helped making the app more easier and 
 * Postgresql : mainly for storing datas and use them
 
 # Requirements :
-If you want to use this app, either change some functionnalities or add new ones, you will need to install java first
+If you want to use this app, either change some functionnalities or add new ones, you will need to install java first </br>
 Go to this link [JDK 18](https://www.oracle.com/java/technologies/javase/jdk18-archive-downloads.html) and install it to run the code
 
 # Installation :
@@ -49,7 +49,7 @@ It is, by default triggered when building the app but if you want to execute it 
 Once checking the code is completed, it will generate an HTML file report for checkstyle result
 , `target/site/jacoco/index.html` contains all output.
 
-### Tests :
+# Tests :
 Jacoco is used for testing code coverage in this application and should be always be above 80% 
 otherwise the build will fail.
 
