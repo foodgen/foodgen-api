@@ -1,11 +1,9 @@
 package com.genfood.foodgenback.security;
 
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.PUT;
-
 import com.genfood.foodgenback.endpoint.rest.model.Role;
 import com.genfood.foodgenback.service.UserDetailsServiceImpl;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,15 +16,22 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.PUT;
+
 @Configuration
-@AllArgsConstructor
 public class SecurityConf {
 
-  private final JWTFilter jwtFilter;
-  private final UserDetailsServiceImpl userDetailsService;
+  @Autowired private JWTFilter jwtFilter;
+  @Autowired private UserDetailsServiceImpl userDetailsService;
+
+  @Autowired
+  @Qualifier("delegatedAuthenticationEntryPoint")
+  private AuthenticationEntryPoint authEntryPoint;
 
   @Bean
   public UserDetailsService userDetailsService() {
@@ -36,8 +41,7 @@ public class SecurityConf {
   @Bean
   public SecurityFilterChain filterChain(
       HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
-    return http.cors(AbstractHttpConfigurer::disable)
-        .csrf(AbstractHttpConfigurer::disable)
+    return http.csrf(AbstractHttpConfigurer::disable)
         .sessionManagement(
             session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(
@@ -80,6 +84,7 @@ public class SecurityConf {
                     .authenticated())
         .authenticationManager(authenticationManager)
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+        .exceptionHandling(ex -> ex.authenticationEntryPoint(authEntryPoint))
         .build();
   }
 

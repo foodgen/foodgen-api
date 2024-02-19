@@ -5,17 +5,19 @@ import com.genfood.foodgenback.repository.model.exception.BadRequestException;
 import com.genfood.foodgenback.repository.model.exception.ForbiddenException;
 import com.genfood.foodgenback.repository.model.exception.NotFoundException;
 import io.jsonwebtoken.JwtException;
-import java.sql.SQLException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpServerErrorException;
+
+import java.sql.SQLException;
 
 @RestControllerAdvice
 @Slf4j
@@ -37,7 +39,8 @@ public class RestExceptionHandler {
       value = {
         AccessDeniedException.class,
         ForbiddenException.class,
-        BadCredentialsException.class
+        BadCredentialsException.class,
+        AuthenticationException.class
       })
   ResponseEntity<Exception> handleForbidden(java.lang.Exception e) {
     log.info(e.getClass().getSimpleName(), e);
