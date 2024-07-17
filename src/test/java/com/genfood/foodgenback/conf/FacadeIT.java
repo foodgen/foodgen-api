@@ -2,6 +2,7 @@ package com.genfood.foodgenback.conf;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -12,6 +13,9 @@ import org.testcontainers.containers.PostgreSQLContainer;
 @DirtiesContext
 public class FacadeIT {
   static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:latest");
+
+  @Value("${test.token.signing.key}")
+  static String TEST_TOKEN_SIGNING_KEY;
 
   @BeforeAll
   static void beforeAll() {
@@ -26,11 +30,10 @@ public class FacadeIT {
   @DynamicPropertySource
   static void configureProperties(DynamicPropertyRegistry registry) {
     String flywayTestdataPath = "classpath:/db/testdata";
-    String tokenSigningKey = "azertyuiopmlkjhgfdswxcvbnnbvcxwmlkjhgfdsqpoiuytrekqjsdkqsjdkqszaaa";
     registry.add("spring.datasource.url", postgres::getJdbcUrl);
     registry.add("spring.datasource.username", postgres::getUsername);
     registry.add("spring.datasource.password", postgres::getPassword);
-    registry.add("token.signing.key", () -> tokenSigningKey);
+    registry.add("token.signing.key", () -> TEST_TOKEN_SIGNING_KEY);
     registry.add("spring.flyway.locations", () -> "classpath:/db/migration," + flywayTestdataPath);
   }
 }

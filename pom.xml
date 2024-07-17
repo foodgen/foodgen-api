@@ -162,7 +162,6 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <exclude>**/com/genfood/foodgenback/*</exclude>
                         <exclude>**/com/genfood/foodgenback/endpoint/rest/model/**</exclude>
                         <exclude>**/com/genfood/foodgenback/endpoint/rest/**</exclude>
                         <exclude>**/com/genfood/foodgenback/repository/model/**</exclude>
@@ -181,13 +180,6 @@
                         </goals>
                         <configuration>
                             <dataFile>target/jacoco.exec</dataFile>
-                            <excludes>
-                                <exclude>**/com/genfood/foodgenback/*</exclude>
-                                <exclude>**/com/genfood/foodgenback/endpoint/rest/model/**</exclude>
-                                <exclude>**/com/genfood/foodgenback/endpoint/rest/**</exclude>
-                                <exclude>**/com/genfood/foodgenback/repository/model/**</exclude>
-                                <exclude>**/com/genfood/foodgenback/security/**</exclude>
-                            </excludes>
                             <rules>
                                 <rule>
                                     <element>PACKAGE</element>

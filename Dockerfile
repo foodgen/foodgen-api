@@ -1,6 +1,6 @@
 FROM ubuntu:latest AS build
 
-RUN apt update && apt install -y openjdk-17-jdk maven
+RUN apt update && apt install -y amazoncorretto:17-alpine-jdk maven
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ COPY . .
 
 RUN mvn package -DskipTests
 
-FROM openjdk:17-jdk-slim
+FROM amazoncorretto:17-alpine-jdk
 
 COPY --from=build /app/target/*.jar app.jar
 
