@@ -15,7 +15,7 @@ public class FacadeIT {
   static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:latest");
 
   @Value("${test.token.signing.key}")
-  static String TEST_TOKEN_SIGNING_KEY;
+  static String testTokenSigningKey;
 
   @BeforeAll
   static void beforeAll() {
@@ -33,7 +33,7 @@ public class FacadeIT {
     registry.add("spring.datasource.url", postgres::getJdbcUrl);
     registry.add("spring.datasource.username", postgres::getUsername);
     registry.add("spring.datasource.password", postgres::getPassword);
-    registry.add("token.signing.key", () -> TEST_TOKEN_SIGNING_KEY);
+    registry.add("token.signing.key", () -> testTokenSigningKey);
     registry.add("spring.flyway.locations", () -> "classpath:/db/migration," + flywayTestdataPath);
   }
 }
