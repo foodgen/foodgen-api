@@ -1,5 +1,6 @@
 package com.genfood.foodgenback.conf;
 
+import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext
+@AllArgsConstructor
 public class FacadeIT {
   static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:latest");
 
