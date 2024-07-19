@@ -83,7 +83,6 @@ public class UserUtils {
         .firstname(USER1_FIRSTNAME)
         .lastname(USER1_LASTNAME)
         .email(USER1_EMAIL)
-        .password(USER1_PASSWORD)
         .role(Role.valueOf(USER1_ROLE))
         .build();
   }

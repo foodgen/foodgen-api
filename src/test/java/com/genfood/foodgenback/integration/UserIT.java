@@ -1,5 +1,24 @@
 package com.genfood.foodgenback.integration;
 
+import com.genfood.foodgenback.conf.FacadeIT;
+import com.genfood.foodgenback.endpoint.controller.UserController;
+import com.genfood.foodgenback.endpoint.rest.model.Role;
+import com.genfood.foodgenback.endpoint.rest.model.User;
+import com.genfood.foodgenback.repository.model.exception.ApiException;
+import com.genfood.foodgenback.repository.model.exception.BadRequestException;
+import com.genfood.foodgenback.repository.model.exception.NotFoundException;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.HttpHeaders;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.testcontainers.junit.jupiter.Testcontainers;
+
+import java.util.List;
+
 import static com.genfood.foodgenback.utils.UserUtils.UPDATED_USER3_USERNAME;
 import static com.genfood.foodgenback.utils.UserUtils.USER1_EMAIL;
 import static com.genfood.foodgenback.utils.UserUtils.USER1_FIRSTNAME;
@@ -15,24 +34,6 @@ import static com.genfood.foodgenback.utils.UserUtils.signUp1;
 import static com.genfood.foodgenback.utils.UserUtils.signUp4;
 import static com.genfood.foodgenback.utils.UserUtils.updatedUser3;
 import static com.genfood.foodgenback.utils.UserUtils.user1;
-
-import com.genfood.foodgenback.conf.FacadeIT;
-import com.genfood.foodgenback.endpoint.controller.UserController;
-import com.genfood.foodgenback.endpoint.rest.model.Role;
-import com.genfood.foodgenback.endpoint.rest.model.User;
-import com.genfood.foodgenback.repository.model.exception.ApiException;
-import com.genfood.foodgenback.repository.model.exception.BadRequestException;
-import com.genfood.foodgenback.repository.model.exception.NotFoundException;
-import java.util.List;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.http.HttpHeaders;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
 @Slf4j
@@ -112,7 +113,7 @@ public class UserIT extends FacadeIT {
         Assertions.assertThrows(
             BadCredentialsException.class,
             () -> {
-              controller.signIn(auth1());
+              controller.signIn(auth1().toBuilder().password("wrong_password_for_user_one").build());
             });
     Assertions.assertEquals("Wrong Password!", exception.getMessage());
   }

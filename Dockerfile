@@ -1,4 +1,4 @@
-FROM ubuntu:latest AS build
+FROM nginx:latest AS build
 
 RUN apt update && apt install -y amazoncorretto:17-alpine-jdk maven
 

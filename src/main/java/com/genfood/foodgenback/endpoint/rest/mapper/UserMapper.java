@@ -15,7 +15,6 @@ public class UserMapper {
         .id(entity.getId())
         .email(entity.getEmail())
         .username(entity.getUsername())
-        .password(entity.getPassword())
         .firstname(entity.getFirstname())
         .lastname(entity.getLastname())
         .role(entity.getRole())

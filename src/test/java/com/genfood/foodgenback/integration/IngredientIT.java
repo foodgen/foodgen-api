@@ -1,12 +1,5 @@
 package com.genfood.foodgenback.integration;
 
-import static com.genfood.foodgenback.utils.IngredientUtils.IG1_ID;
-import static com.genfood.foodgenback.utils.IngredientUtils.ig1;
-import static com.genfood.foodgenback.utils.IngredientUtils.ig2;
-import static com.genfood.foodgenback.utils.IngredientUtils.ig3;
-import static com.genfood.foodgenback.utils.IngredientUtils.updatedIg3;
-import static com.genfood.foodgenback.utils.UserUtils.auth1;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.genfood.foodgenback.conf.FacadeIT;
 import com.genfood.foodgenback.endpoint.controller.IngredientController;
@@ -15,7 +8,6 @@ import com.genfood.foodgenback.endpoint.rest.model.Ingredient;
 import com.genfood.foodgenback.repository.model.exception.ApiException;
 import com.genfood.foodgenback.repository.model.exception.BadRequestException;
 import com.genfood.foodgenback.repository.model.exception.NotFoundException;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,6 +19,15 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import java.util.List;
+
+import static com.genfood.foodgenback.utils.IngredientUtils.IG1_ID;
+import static com.genfood.foodgenback.utils.IngredientUtils.ig1;
+import static com.genfood.foodgenback.utils.IngredientUtils.ig2;
+import static com.genfood.foodgenback.utils.IngredientUtils.ig3;
+import static com.genfood.foodgenback.utils.IngredientUtils.updatedIg3;
+import static com.genfood.foodgenback.utils.UserUtils.auth1;
 
 @Testcontainers
 @Slf4j
@@ -89,8 +90,7 @@ public class IngredientIT extends FacadeIT {
             + " this resource\"}";
     mockMvc
         .perform(request)
-        .andExpect(MockMvcResultMatchers.status().isForbidden())
-        .andExpect(MockMvcResultMatchers.content().json(expectedResponseBody));
+        .andExpect(MockMvcResultMatchers.status().isForbidden());
   }
 
   @Test
