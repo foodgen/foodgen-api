@@ -1,6 +1,9 @@
 FROM nginx:latest AS build
 
-RUN apt update && apt install -y amazoncorretto:17-alpine-jdk maven
+RUN wget -O - https://apt.corretto.aws/corretto.key | gpg --dearmor -o /usr/share/keyrings/corretto-keyring.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/corretto-keyring.gpg] https://apt.corretto.aws stable main" | tee /etc/apt/sources.list.d/corretto.list
+
+RUN apt update && apt install -y java-17-amazon-corretto-jdk maven
 
 WORKDIR /app
 
