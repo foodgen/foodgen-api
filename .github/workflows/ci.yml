@@ -24,10 +24,10 @@ jobs:
           java-version: "17"
           distribution: "corretto"
           cache: maven
-      - run: echo "TOKEN_SIGNING_KEY=$ {{ secrets.TOKEN_SIGNING_KEY }}" >> $GITHUB_ENV
-      - run: echo "The key is $TOKEN_SIGNING_KEY HERE"
       - run: chmod +x mvnw
       - run: ./mvnw test
+        env:
+          TOKEN_SIGNING_KEY: ${{ secrets.TOKEN_SIGNING_KEY }}
 
   format:
     runs-on: ubuntu-latest
