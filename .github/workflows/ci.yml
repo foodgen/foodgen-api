@@ -25,6 +25,7 @@ jobs:
           distribution: "corretto"
           cache: maven
       - run: echo "TOKEN_SIGNING_KEY=$ {{ secrets.TOKEN_SIGNING_KEY }}" >> $GITHUB_ENV
+      - run: echo "The key is $TOKEN_SIGNING_KEY HERE"
       - run: chmod +x mvnw
       - run: ./mvnw test
 
