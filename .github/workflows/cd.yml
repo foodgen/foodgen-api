@@ -11,7 +11,7 @@ on:
 
 jobs:
   production-deploy:
-    if: ${{ github.ref_name == 'prod' }}
+    if: ${{ github.ref_name == 'prod' && github.event.workflow_run.conclusion == 'success'}}
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -34,7 +34,7 @@ jobs:
           api-key: ${{ secrets.PROD_RENDER_API_KEY }}
 
   preproduction-deploy:
-    if: ${{ github.ref_name == 'preprod' }}
+    if: ${{ github.ref_name == 'preprod' && github.event.workflow_run.conclusion == 'success'}}
     runs-on: ubuntu-latest
     timeout-minutes: 20
 

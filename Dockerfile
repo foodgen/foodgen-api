@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN mvn package -DskipTests
+RUN mvn -Dmaven.test.skip=true package
 
 FROM amazoncorretto:17-alpine-jdk
 
