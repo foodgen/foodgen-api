@@ -2,7 +2,7 @@ FROM maven:3.9.8-sapmachine-17 AS build
 
 WORKDIR /app
 
-COPY pom.xml src /app/
+COPY . .
 
 RUN mvn -Dmaven.test.skip=true package
 
