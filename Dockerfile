@@ -1,10 +1,8 @@
-FROM ubuntu:latest AS build
-
-RUN apt update && apt install -y openjdk-17-jdk maven
+FROM 3.9.8-sapmachine-17 AS build
 
 WORKDIR /app
 
-COPY . .
+COPY pom.xml src /app/
 
 RUN mvn -Dmaven.test.skip=true package
 
