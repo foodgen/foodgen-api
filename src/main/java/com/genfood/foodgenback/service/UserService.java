@@ -16,7 +16,6 @@ import com.genfood.foodgenback.repository.validator.MailValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,7 +29,6 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-@Slf4j
 public class UserService {
   private final UserRepository repository;
   private final MailValidator mailValidator;

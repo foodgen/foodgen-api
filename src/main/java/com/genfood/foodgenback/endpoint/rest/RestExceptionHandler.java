@@ -5,7 +5,6 @@ import com.genfood.foodgenback.repository.model.exception.BadRequestException;
 import com.genfood.foodgenback.repository.model.exception.ForbiddenException;
 import com.genfood.foodgenback.repository.model.exception.NotFoundException;
 import io.jsonwebtoken.JwtException;
-import java.sql.SQLException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
@@ -18,6 +17,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpServerErrorException;
 
+import java.sql.SQLException;
+
 @RestControllerAdvice
 @Slf4j
 public class RestExceptionHandler {
@@ -25,7 +26,6 @@ public class RestExceptionHandler {
   @ExceptionHandler(
       value = {BadRequestException.class, DuplicateKeyException.class, JwtException.class})
   ResponseEntity<Exception> handleBadRequest(java.lang.Exception e) {
-    log.info(e.getClass().getSimpleName(), e);
     Exception restException =
         Exception.builder()
             .type(BadRequestException.class.getSimpleName())

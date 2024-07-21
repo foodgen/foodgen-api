@@ -10,7 +10,7 @@ import com.genfood.foodgenback.repository.model.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotatio;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -36,10 +36,9 @@ import static com.genfood.foodgenback.utils.UserUtils.updatedUser3;
 import static com.genfood.foodgenback.utils.UserUtils.user1;
 
 @Testcontainers
-@Slf4j
 public class UserIT extends FacadeIT {
-  @Autowired private UserController controller;
-  MockHttpServletRequest request;
+  private UserController controller;
+  private MockHttpServletRequest request;
 
   @Test
   void read_user_by_username() {

@@ -12,6 +12,8 @@ import com.genfood.foodgenback.endpoint.rest.model.Allergy;
 import com.genfood.foodgenback.repository.model.exception.ApiException;
 import com.genfood.foodgenback.repository.model.exception.NotFoundException;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,11 +23,11 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
-@Slf4j
+@AllArgsConstructor
 public class AllergyIT extends FacadeIT {
-  MockHttpServletRequest request;
-  @Autowired private AllergyController allergyController;
-  @Autowired private UserController userController;
+  private MockHttpServletRequest request;
+  private AllergyController allergyController;
+  private UserController userController;
 
   @Test
   void read_allergies() {

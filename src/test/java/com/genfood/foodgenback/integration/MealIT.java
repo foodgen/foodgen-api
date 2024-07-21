@@ -25,26 +25,28 @@ import com.genfood.foodgenback.utils.IngredientUtils;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotatio;
 import org.springframework.http.HttpHeaders;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
-@Slf4j
+@AllArgsConstructor
 public class MealIT extends FacadeIT {
   public static final int PAGE = 0;
   public static final int PAGE_SIZE = 5;
-  @Autowired private MealController mealController;
-  @Autowired private MealService mealService;
-  @Autowired private MealMapper mealMapper;
-  @Autowired private UserController userController;
-  @Autowired private UserDetailsServiceImpl userDetailsService;
-  @Autowired JWTService jwtService;
-  MockHttpServletRequest request;
+  private MealController mealController;
+  private MealService mealService;
+  private MealMapper mealMapper;
+  private UserController userController;
+  private UserDetailsServiceImpl userDetailsService;
+  private JWTService jwtService;
+  private MockHttpServletRequest request;
 
   @Test
   void read_meals() {

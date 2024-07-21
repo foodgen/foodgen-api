@@ -8,10 +8,9 @@ import com.genfood.foodgenback.endpoint.rest.model.Ingredient;
 import com.genfood.foodgenback.repository.model.exception.ApiException;
 import com.genfood.foodgenback.repository.model.exception.BadRequestException;
 import com.genfood.foodgenback.repository.model.exception.NotFoundException;
-import lombok.extern.slf4j.Slf4j;
+import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,14 +29,14 @@ import static com.genfood.foodgenback.utils.IngredientUtils.updatedIg3;
 import static com.genfood.foodgenback.utils.UserUtils.auth1;
 
 @Testcontainers
-@Slf4j
+@AllArgsConstructor
 @AutoConfigureMockMvc
 public class IngredientIT extends FacadeIT {
-  @Autowired MockMvc mockMvc;
+  private MockMvc mockMvc;
   public static final int PAGE = 0;
   public static final int PAGE_SIZE = 10;
-  @Autowired private IngredientController ingredientController;
-  @Autowired private UserController userController;
+  private IngredientController ingredientController;
+  private UserController userController;
 
   @Test
   void read_ingredients() {
