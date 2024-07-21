@@ -1,5 +1,12 @@
 package com.genfood.foodgenback.integration;
 
+import static com.genfood.foodgenback.utils.IngredientUtils.IG1_ID;
+import static com.genfood.foodgenback.utils.IngredientUtils.ig1;
+import static com.genfood.foodgenback.utils.IngredientUtils.ig2;
+import static com.genfood.foodgenback.utils.IngredientUtils.ig3;
+import static com.genfood.foodgenback.utils.IngredientUtils.updatedIg3;
+import static com.genfood.foodgenback.utils.UserUtils.auth1;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.genfood.foodgenback.conf.FacadeIT;
 import com.genfood.foodgenback.endpoint.controller.IngredientController;
@@ -8,9 +15,10 @@ import com.genfood.foodgenback.endpoint.rest.model.Ingredient;
 import com.genfood.foodgenback.repository.model.exception.ApiException;
 import com.genfood.foodgenback.repository.model.exception.BadRequestException;
 import com.genfood.foodgenback.repository.model.exception.NotFoundException;
-import lombok.AllArgsConstructor;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,24 +27,14 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.util.List;
-
-import static com.genfood.foodgenback.utils.IngredientUtils.IG1_ID;
-import static com.genfood.foodgenback.utils.IngredientUtils.ig1;
-import static com.genfood.foodgenback.utils.IngredientUtils.ig2;
-import static com.genfood.foodgenback.utils.IngredientUtils.ig3;
-import static com.genfood.foodgenback.utils.IngredientUtils.updatedIg3;
-import static com.genfood.foodgenback.utils.UserUtils.auth1;
-
 @Testcontainers
-@AllArgsConstructor
 @AutoConfigureMockMvc
 public class IngredientIT extends FacadeIT {
-  private MockMvc mockMvc;
+  @Autowired private MockMvc mockMvc;
   public static final int PAGE = 0;
   public static final int PAGE_SIZE = 10;
-  private IngredientController ingredientController;
-  private UserController userController;
+  @Autowired private IngredientController ingredientController;
+  @Autowired private UserController userController;
 
   @Test
   void read_ingredients() {
@@ -87,9 +85,7 @@ public class IngredientIT extends FacadeIT {
     String expectedResponseBody =
         "{\"type\":\"ForbiddenException\",\"message\":\"Full authentication is required to access"
             + " this resource\"}";
-    mockMvc
-        .perform(request)
-        .andExpect(MockMvcResultMatchers.status().isForbidden());
+    mockMvc.perform(request).andExpect(MockMvcResultMatchers.status().isForbidden());
   }
 
   @Test

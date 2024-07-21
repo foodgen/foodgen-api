@@ -14,21 +14,16 @@ import com.genfood.foodgenback.endpoint.rest.model.RecipeIngredients;
 import com.genfood.foodgenback.repository.model.exception.BadRequestException;
 import com.genfood.foodgenback.repository.model.exception.NotFoundException;
 import java.util.List;
-
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
-@AllArgsConstructor
 public class RecipeIT extends FacadeIT {
-
   public static final int PAGE = 0;
   public static final int PAGE_SIZE = 10;
-  private RecipeController controller;
+  @Autowired private RecipeController controller;
 
   @Test
   void read_recipes() {

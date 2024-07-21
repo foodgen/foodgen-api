@@ -1,5 +1,10 @@
 package com.genfood.foodgenback.integration;
 
+import static com.genfood.foodgenback.utils.RegionUtils.REGION1_ID;
+import static com.genfood.foodgenback.utils.RegionUtils.region1;
+import static com.genfood.foodgenback.utils.RegionUtils.region2;
+import static com.genfood.foodgenback.utils.RegionUtils.updatedRegion3;
+
 import com.genfood.foodgenback.conf.FacadeIT;
 import com.genfood.foodgenback.endpoint.controller.RegionController;
 import com.genfood.foodgenback.endpoint.rest.model.Region;
@@ -9,30 +14,23 @@ import com.genfood.foodgenback.repository.model.exception.ForbiddenException;
 import com.genfood.foodgenback.repository.model.exception.NotFoundException;
 import com.genfood.foodgenback.service.JWTService;
 import com.genfood.foodgenback.service.UserDetailsServiceImpl;
-import lombok.AllArgsConstructor;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.util.List;
-
-import static com.genfood.foodgenback.utils.RegionUtils.REGION1_ID;
-import static com.genfood.foodgenback.utils.RegionUtils.region1;
-import static com.genfood.foodgenback.utils.RegionUtils.region2;
-import static com.genfood.foodgenback.utils.RegionUtils.updatedRegion3;
-
 @Testcontainers
-@AllArgsConstructor
 public class RegionIT extends FacadeIT {
   public static final int PAGE = 0;
   public static final int PAGE_SIZE = 10;
   private MockHttpServletRequest request;
-  private RegionController controller;
-  private JWTService jwtService;
-  private UserDetailsServiceImpl userDetailsService;
+  @Autowired private RegionController controller;
+  @Autowired private JWTService jwtService;
+  @Autowired private UserDetailsServiceImpl userDetailsService;
 
   @Test
   void read_regions() {
