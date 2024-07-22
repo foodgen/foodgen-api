@@ -6,10 +6,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -20,7 +20,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-@EqualsAndHashCode
 public class Recipe {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,4 +30,21 @@ public class Recipe {
 
   @Column(nullable = false)
   private String readme;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Recipe recipe = (Recipe) o;
+    return Objects.equals(name, recipe.name) && Objects.equals(readme, recipe.readme);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, readme);
+  }
 }

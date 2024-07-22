@@ -1,27 +1,40 @@
 package com.genfood.foodgenback.endpoint.rest.mapper;
 
-import com.genfood.foodgenback.endpoint.rest.model.Ingredient;
-import com.genfood.foodgenback.endpoint.rest.model.RecipeIngredients;
+import com.genfood.foodgenback.repository.model.Ingredient;
 import com.genfood.foodgenback.repository.model.RecipeIngredient;
-import java.util.ArrayList;
+import com.genfood.foodgenback.service.IngredientService;
+import com.genfood.foodgenback.service.RecipeService;
 import java.util.List;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
 public class RecipeIngredientMapper {
-  private final RecipeMapper recipeMapper;
-  private final IngredientMapper ingredientMapper;
+  private IngredientService ingredientService;
+  private RecipeService recipeService;
 
-  public RecipeIngredients toDto(List<RecipeIngredient> entity) {
-    List<Ingredient> ingredients = new ArrayList<>();
-    for (int i = 0; i < entity.size(); i++) {
-      ingredients.add(ingredientMapper.toDto(entity.get(i).getIngredient()));
+  public com.genfood.foodgenback.endpoint.rest.model.RecipeIngredient toDto(
+      RecipeIngredient entity) {
+    return com.genfood.foodgenback.endpoint.rest.model.RecipeIngredient.builder()
+        .id(entity.getId())
+        .ingredientName(
+            Objects.nonNull(entity.getIngredient()) ? entity.getIngredient().getName() : null)
+        .measure(entity.getMeasure())
+        .build();
+  }
+
+  public RecipeIngredient toEntity(
+      com.genfood.foodgenback.endpoint.rest.model.RecipeIngredient dto, String recipeId) {
+    Ingredient ingredient = ingredientService.getIngredientByName(dto.getIngredientName());
+    if (Objects.isNull(ingredient)) {
+      ingredientService.saveIngredients(
+          List.of(Ingredient.builder().name(dto.getIngredientName()).build()));
     }
-    return RecipeIngredients.builder()
-        .recipe(recipeMapper.toDto(entity.get(0).getRecipe()))
-        .ingredients(ingredients.size() > 0 ? ingredients : null)
+    return RecipeIngredient.builder()
+        .ingredient(ingredientService.getIngredientByName(dto.getIngredientName()))
+        .recipe(recipeService.getRecipeById(recipeId))
         .build();
   }
 }

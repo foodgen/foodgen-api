@@ -10,6 +10,7 @@ public class IngredientUtils {
   public static final String IG2_NAME = "ig2_name";
   public static final String IG3_NAME = "ig3_name";
   public static final String UPDATED_IG3_NAME = "ingredient3_name";
+  public static final String IG2_MEASURE = "ingredient2_measure";
 
   public static Ingredient ig1() {
     return Ingredient.builder().id(IG1_ID).name(IG1_NAME).build();

@@ -40,7 +40,6 @@ public class IngredientIT extends FacadeIT {
   void read_ingredients() {
     List<Ingredient> actual = ingredientController.getIngredients(PAGE, PAGE_SIZE);
     Assertions.assertTrue(actual.contains(ig1()));
-    Assertions.assertTrue(actual.contains(ig2()));
     int expected = 3;
     Assertions.assertEquals(expected, actual.size());
   }

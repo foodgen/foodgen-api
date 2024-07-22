@@ -1,8 +1,7 @@
 package com.genfood.foodgenback.service;
 
 import com.genfood.foodgenback.endpoint.rest.mapper.RecipeIngredientMapper;
-import com.genfood.foodgenback.endpoint.rest.model.Ingredient;
-import com.genfood.foodgenback.endpoint.rest.model.RecipeIngredients;
+import com.genfood.foodgenback.endpoint.rest.model.RecipeIngredient;
 import com.genfood.foodgenback.repository.JDBCQueries;
 import com.genfood.foodgenback.repository.MealRepository;
 import com.genfood.foodgenback.repository.model.Meal;
@@ -75,12 +74,14 @@ public class MealService {
 
   public byte[] generatePDF(String mealId) throws IOException {
     Meal meal = mealRepository.findById(mealId).get();
-    RecipeIngredients recipe =
-        recipeIngredientMapper.toDto(
-            recipeIngredientService.getAllByRecipeId(meal.getRecipe().getId()));
+    List<RecipeIngredient> recipeIngredients =
+        recipeIngredientService.getAllByRecipeId(meal.getRecipe().getId()).stream()
+            .map(recipeIngredientMapper::toDto)
+            .toList();
     String ingredients = "";
-    for (Ingredient ingredient : recipe.getIngredients()) {
-      ingredients += ingredient.getName() + ", ";
+    for (RecipeIngredient recipeIngredient : recipeIngredients) {
+      ingredients +=
+          recipeIngredient.getIngredientName() + " " + recipeIngredient.getMeasure() + ", ";
     }
     try (PDDocument document = new PDDocument()) {
       PDPage page = new PDPage();

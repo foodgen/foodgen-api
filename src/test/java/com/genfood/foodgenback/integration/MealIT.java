@@ -97,9 +97,9 @@ public class MealIT extends FacadeIT {
   void read_meal_by_download() {
     List<Meal> actual = mealController.getMealsOrderedByDownload(PAGE, PAGE_SIZE);
     Assertions.assertEquals(5, actual.size());
-    Assertions.assertEquals(actual.get(0), updatedDownloadMeal1());
-    Assertions.assertEquals(actual.get(1), meal9());
-    Assertions.assertEquals(actual.get(2), meal8());
+    Assertions.assertEquals(updatedDownloadMeal1(), actual.get(0));
+    Assertions.assertEquals(meal9(), actual.get(1));
+    Assertions.assertEquals(meal8(), actual.get(2));
   }
 
   @Test

@@ -305,7 +305,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RecipeIngredients'
+                $ref: '#/components/schemas/Recipe'
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -333,11 +333,11 @@ paths:
             $ref: '#/components/schemas/PageSize'
       responses:
         '200':
-          description: return the specific recipe
+          description: a list of all recipes
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RecipeIngredients'
+                $ref: '#/components/schemas/Recipe'
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -365,7 +365,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/RecipeIngredients'
+                  $ref: '#/components/schemas/Recipe'
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -676,8 +676,8 @@ paths:
           application/json:
             schema:
               items:
-                - type: string
-                  default: "chicken"
+                type: string
+                example: "Chicken"
       responses:
         '200':
           description: return a list of crupdated allergies.
@@ -722,6 +722,11 @@ paths:
         '500':
           description: Server error
 components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+
   responses:
     '400':
       description: Bad request
@@ -814,6 +819,10 @@ components:
         readme:
           type: string
           example: Bunch of text
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecipeIngredient'
     Recipe:
       allOf:
         - $ref: '#/components/schemas/CreateRecipe'
@@ -845,6 +854,13 @@ components:
         id:
           type: string
           format: uuid
+    RecipeIngredient:
+      allOf:
+        - $ref: '#/components/schemas/CreateIngredient'
+      type: object
+      properties:
+        measure:
+          type: string
     Allergy:
       type: object
       properties:
@@ -853,15 +869,6 @@ components:
           format: uuid
         ingredient_name:
           type: string
-    RecipeIngredients:
-      type: object
-      properties:
-        recipe:
-          $ref: '#/components/schemas/Recipe'
-        ingredient:
-          type: array
-          items:
-            $ref: '#/components/schemas/Ingredient'
     Meal:
       type: object
       properties:

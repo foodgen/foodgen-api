@@ -1,10 +1,6 @@
 package com.genfood.foodgenback.utils;
 
-import static com.genfood.foodgenback.utils.IngredientUtils.ig1;
-import static com.genfood.foodgenback.utils.IngredientUtils.ig2;
-
 import com.genfood.foodgenback.endpoint.rest.model.Recipe;
-import com.genfood.foodgenback.endpoint.rest.model.RecipeIngredients;
 import java.util.List;
 
 public class RecipeUtils {
@@ -25,7 +21,9 @@ public class RecipeUtils {
   public static final String RECIPE6_NAME = "recipe6_name";
   public static final String RECIPE7_NAME = "recipe7_name";
   public static final String RECIPE8_NAME = "recipe8_name";
+  public static final String UPDATED_RECIPE8_NAME = "updated_recipe8_name";
   public static final String RECIPE9_NAME = "recipe9_name";
+  public static final String UPDATED_RECIPE9_NAME = "updated_recipe9_name";
   public static final String UPDATED_RECIPE3_NAME = "rcp3_name";
   public static final String RECIPE1_README = "recipe1_readme";
   public static final String RECIPE2_README = "recipe2_readme";
@@ -38,15 +36,27 @@ public class RecipeUtils {
   public static final String RECIPE9_README = "recipe9_readme";
 
   public static Recipe recipe1() {
-    return Recipe.builder().id(RECIPE1_ID).name(RECIPE1_NAME).readme(RECIPE1_README).build();
-  }
-
-  public static RecipeIngredients recipeIngredients1() {
-    return RecipeIngredients.builder().recipe(recipe1()).ingredients(List.of(ig1(), ig2())).build();
+    return Recipe.builder()
+        .id(RECIPE1_ID)
+        .name(RECIPE1_NAME)
+        .readme(RECIPE1_README)
+        .ingredients(
+            List.of(
+                RecipeIngredientUtils.recipeIngredient1(),
+                RecipeIngredientUtils.recipeIngredient2()))
+        .build();
   }
 
   public static Recipe recipe2() {
-    return Recipe.builder().id(RECIPE2_ID).name(RECIPE2_NAME).readme(RECIPE2_README).build();
+    return Recipe.builder()
+        .id(RECIPE2_ID)
+        .name(RECIPE2_NAME)
+        .readme(RECIPE2_README)
+        .ingredients(
+            List.of(
+                RecipeIngredientUtils.recipeIngredient3(),
+                RecipeIngredientUtils.recipeIngredient4()))
+        .build();
   }
 
   public static Recipe recipe3() {
@@ -62,19 +72,27 @@ public class RecipeUtils {
   }
 
   public static Recipe recipe6() {
-    return Recipe.builder().id(RECIPE6_ID).name(RECIPE6_NAME).readme(RECIPE6_README).build();
+    return Recipe.builder()
+        .id(RECIPE6_ID)
+        .name(RECIPE6_NAME)
+        .readme(RECIPE6_README)
+        .ingredients(
+            List.of(
+                RecipeIngredientUtils.recipeIngredient11(),
+                RecipeIngredientUtils.recipeIngredient12()))
+        .build();
   }
 
   public static Recipe recipe7() {
-    return Recipe.builder().id(RECIPE7_ID).name(RECIPE7_NAME).readme(RECIPE7_README).build();
-  }
-
-  public static Recipe recipe8() {
-    return Recipe.builder().id(RECIPE8_ID).name(RECIPE8_NAME).readme(RECIPE8_README).build();
-  }
-
-  public static Recipe recipe9() {
-    return Recipe.builder().id(RECIPE9_ID).name(RECIPE9_NAME).readme(RECIPE9_README).build();
+    return Recipe.builder()
+        .id(RECIPE7_ID)
+        .name(RECIPE7_NAME)
+        .readme(RECIPE7_README)
+        .ingredients(
+            List.of(
+                RecipeIngredientUtils.recipeIngredient13(),
+                RecipeIngredientUtils.recipeIngredient14()))
+        .build();
   }
 
   public static Recipe updatedRecipe3() {
@@ -82,6 +100,58 @@ public class RecipeUtils {
         .id(RECIPE3_ID)
         .name(UPDATED_RECIPE3_NAME)
         .readme(RECIPE3_README)
+        .ingredients(
+            List.of(
+                RecipeIngredientUtils.recipeIngredient5(),
+                RecipeIngredientUtils.recipeIngredient6()))
+        .build();
+  }
+
+  public static Recipe recipe8() {
+    return Recipe.builder()
+        .id(RECIPE8_ID)
+        .name(RECIPE8_NAME)
+        .readme(RECIPE8_README)
+        .ingredients(
+            List.of(
+                RecipeIngredientUtils.recipeIngredient15(),
+                RecipeIngredientUtils.recipeIngredient16()))
+        .build();
+  }
+
+  public static Recipe updatedRecipe8() {
+    return Recipe.builder()
+        .id(RECIPE8_ID)
+        .name(UPDATED_RECIPE8_NAME)
+        .readme(RECIPE8_README)
+        .ingredients(
+            List.of(
+                RecipeIngredientUtils.recipeIngredient15(),
+                RecipeIngredientUtils.recipeIngredient16()))
+        .build();
+  }
+
+  public static Recipe recipe9() {
+    return Recipe.builder()
+        .id(RECIPE9_ID)
+        .name(RECIPE9_NAME)
+        .readme(RECIPE9_README)
+        .ingredients(
+            List.of(
+                RecipeIngredientUtils.recipeIngredient17(),
+                RecipeIngredientUtils.recipeIngredient18()))
+        .build();
+  }
+
+  public static Recipe updatedRecipe9() {
+    return Recipe.builder()
+        .id(RECIPE9_ID)
+        .name(UPDATED_RECIPE9_NAME)
+        .readme(RECIPE9_README)
+        .ingredients(
+            List.of(
+                RecipeIngredientUtils.recipeIngredient17(),
+                RecipeIngredientUtils.recipeIngredient18()))
         .build();
   }
 }

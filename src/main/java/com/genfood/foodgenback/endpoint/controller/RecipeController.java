@@ -1,10 +1,7 @@
 package com.genfood.foodgenback.endpoint.controller;
 
-import com.genfood.foodgenback.endpoint.rest.mapper.RecipeIngredientMapper;
 import com.genfood.foodgenback.endpoint.rest.mapper.RecipeMapper;
 import com.genfood.foodgenback.endpoint.rest.model.Recipe;
-import com.genfood.foodgenback.endpoint.rest.model.RecipeIngredients;
-import com.genfood.foodgenback.service.RecipeIngredientService;
 import com.genfood.foodgenback.service.RecipeService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,8 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class RecipeController {
   private final RecipeService recipeService;
   private final RecipeMapper recipeMapper;
-  private final RecipeIngredientMapper recipeIngredientMapper;
-  private final RecipeIngredientService recipeIngredientService;
 
   @GetMapping("/recipes")
   public List<Recipe> getRecipes(
@@ -37,20 +32,17 @@ public class RecipeController {
   }
 
   @GetMapping("/recipes/{id}")
-  public RecipeIngredients getRecipeById(@PathVariable String id) {
-    RecipeIngredients recipe =
-        recipeIngredientMapper.toDto(recipeIngredientService.getAllByRecipeId(id));
-    return recipe;
+  public Recipe getRecipeById(@PathVariable String id) {
+    return recipeMapper.toDto(recipeService.getRecipeById(id));
   }
 
   @PutMapping("/recipes")
   public List<Recipe> crupdateRecipes(@RequestBody List<Recipe> recipes) {
     List<com.genfood.foodgenback.repository.model.Recipe> toSave =
         recipes.stream().map(recipeMapper::toEntity).collect(Collectors.toUnmodifiableList());
-    List<Recipe> updatedRecipes =
-        recipeService.saveRecipes(toSave).stream()
-            .map(recipeMapper::toDto)
-            .collect(Collectors.toUnmodifiableList());
-    return updatedRecipes;
+
+    return recipeService.saveRecipes(toSave).stream()
+        .map(recipeMapper::toDto)
+        .collect(Collectors.toUnmodifiableList());
   }
 }
