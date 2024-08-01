@@ -3,8 +3,6 @@ package com.genfood.foodgenback.endpoint.controller;
 import com.genfood.foodgenback.endpoint.rest.mapper.IngredientMapper;
 import com.genfood.foodgenback.endpoint.rest.model.Ingredient;
 import com.genfood.foodgenback.service.IngredientService;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -23,9 +24,11 @@ public class IngredientController {
 
   @GetMapping("/ingredients")
   public List<Ingredient> getIngredients(
-      @RequestParam("page") Integer page, @RequestParam("page_size") Integer pageSize) {
+      @RequestParam("page") Integer page,
+      @RequestParam("page_size") Integer pageSize,
+      @RequestParam(name = "names", required = false) List<String> ingredientNames) {
     List<Ingredient> ingredients =
-        ingredientService.getIngredients(page, pageSize).stream()
+        ingredientService.getIngredients(page, pageSize, ingredientNames).stream()
             .map(ingredientMapper::toDto)
             .collect(Collectors.toUnmodifiableList());
     return ingredients;

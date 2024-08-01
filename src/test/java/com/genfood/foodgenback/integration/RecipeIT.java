@@ -1,28 +1,25 @@
 package com.genfood.foodgenback.integration;
 
-import com.genfood.foodgenback.conf.FacadeIT;
-import com.genfood.foodgenback.endpoint.controller.RecipeController;
-import com.genfood.foodgenback.endpoint.rest.model.Recipe;
-import com.genfood.foodgenback.repository.model.exception.BadRequestException;
-import com.genfood.foodgenback.repository.model.exception.NotFoundException;
-import com.genfood.foodgenback.utils.RecipeUtils;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
-import org.testcontainers.junit.jupiter.Testcontainers;
-
-import java.util.List;
-
 import static com.genfood.foodgenback.repository.model.exception.ApiException.ExceptionType.CLIENT_EXCEPTION;
 import static com.genfood.foodgenback.utils.RecipeUtils.RECIPE1_ID;
 import static com.genfood.foodgenback.utils.RecipeUtils.recipe1;
 import static com.genfood.foodgenback.utils.RecipeUtils.recipe2;
 import static com.genfood.foodgenback.utils.RecipeUtils.updatedRecipe3;
 
+import com.genfood.foodgenback.conf.FacadeIT;
+import com.genfood.foodgenback.endpoint.controller.RecipeController;
+import com.genfood.foodgenback.endpoint.rest.model.Recipe;
+import com.genfood.foodgenback.repository.model.exception.BadRequestException;
+import com.genfood.foodgenback.repository.model.exception.NotFoundException;
+import com.genfood.foodgenback.utils.RecipeUtils;
+import java.util.List;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+import org.testcontainers.junit.jupiter.Testcontainers;
+
 @Testcontainers
-@Slf4j
 public class RecipeIT extends FacadeIT {
   public static final int PAGE = 0;
   public static final int PAGE_SIZE = 10;
@@ -33,7 +30,6 @@ public class RecipeIT extends FacadeIT {
     List<Recipe> actual = controller.getRecipes(PAGE, PAGE_SIZE);
     Assertions.assertTrue(actual.contains(recipe1()));
     Assertions.assertTrue(actual.contains(recipe2()));
-    log.error(actual.toString());
     Assertions.assertEquals(9, actual.size());
   }
 
@@ -63,7 +59,6 @@ public class RecipeIT extends FacadeIT {
   void crupdate_recipes_with_ingredients_measure() {
     controller.crupdateRecipes(List.of(RecipeUtils.updatedRecipe8(), RecipeUtils.updatedRecipe9()));
     List<Recipe> actual = controller.getRecipes(PAGE, PAGE_SIZE);
-    log.error(actual.toString());
     Assertions.assertTrue(
         actual.containsAll(List.of(RecipeUtils.updatedRecipe8(), RecipeUtils.updatedRecipe9())));
   }

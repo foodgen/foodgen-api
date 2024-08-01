@@ -610,9 +610,17 @@ paths:
           required: true
           schema:
             $ref: '#/components/schemas/PageSize'
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              example: "tomato"
       responses:
         '200':
-          description: return a list of regions
+          description: return a list of ingredients
           content:
             application/json:
               schema:

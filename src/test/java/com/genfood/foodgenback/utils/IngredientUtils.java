@@ -9,6 +9,7 @@ public class IngredientUtils {
   public static final String IG1_NAME = "ig1_name";
   public static final String IG2_NAME = "ig2_name";
   public static final String IG3_NAME = "ig3_name";
+  public static final String IG3_NAME_TYPO = "ig3_mane";
   public static final String UPDATED_IG3_NAME = "ingredient3_name";
   public static final String IG2_MEASURE = "ingredient2_measure";
 

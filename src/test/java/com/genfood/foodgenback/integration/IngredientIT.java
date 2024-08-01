@@ -1,6 +1,7 @@
 package com.genfood.foodgenback.integration;
 
 import static com.genfood.foodgenback.utils.IngredientUtils.IG1_ID;
+import static com.genfood.foodgenback.utils.IngredientUtils.IG3_NAME_TYPO;
 import static com.genfood.foodgenback.utils.IngredientUtils.ig1;
 import static com.genfood.foodgenback.utils.IngredientUtils.ig2;
 import static com.genfood.foodgenback.utils.IngredientUtils.ig3;
@@ -38,10 +39,25 @@ public class IngredientIT extends FacadeIT {
 
   @Test
   void read_ingredients() {
-    List<Ingredient> actual = ingredientController.getIngredients(PAGE, PAGE_SIZE);
+    List<Ingredient> actual = ingredientController.getIngredients(PAGE, PAGE_SIZE, null);
     Assertions.assertTrue(actual.contains(ig1()));
     int expected = 3;
     Assertions.assertEquals(expected, actual.size());
+  }
+
+  @Test
+  void read_ingredients_with_names() {
+    List<Ingredient> actual =
+        ingredientController.getIngredients(
+            PAGE, PAGE_SIZE, List.of(ig1().getName(), ig2().getName(), IG3_NAME_TYPO));
+    Assertions.assertTrue(actual.containsAll(List.of(ig1(), ig2())));
+  }
+
+  @Test
+  void read_ingredients_with_one_name() {
+    List<Ingredient> actual =
+        ingredientController.getIngredients(PAGE, PAGE_SIZE, List.of(ig3().getName()));
+    Assertions.assertTrue(actual.contains(ig3()));
   }
 
   @Test
@@ -64,7 +80,7 @@ public class IngredientIT extends FacadeIT {
   void crupdate_ingredients() {
     ingredientController.crupdateIngredients(List.of(ig1(), ig2(), ig3()));
     ingredientController.crupdateIngredients(List.of(updatedIg3()));
-    List<Ingredient> actual = ingredientController.getIngredients(PAGE, PAGE_SIZE);
+    List<Ingredient> actual = ingredientController.getIngredients(PAGE, PAGE_SIZE, null);
     Assertions.assertEquals(updatedIg3(), actual.get(2));
   }
 
